@@ -5,7 +5,8 @@ function phpasskit_autoload($class = null) {
 
     if ($classes === null) {
         $classes = array(
-          'phpasskit' => '/classes/PHPassKit.class.php'
+          'phpasskit' => '/classes/PHPassKit.class.php',
+          'standardkeys' => '/classes/FieldDictionaryKeys/StandardKeys.class.php'
         );
 
         $path = dirname(dirname(__FILE__));
