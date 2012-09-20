@@ -6,7 +6,9 @@ function phpasskit_autoload($class = null) {
     if ($classes === null) {
         $classes = array(
           'phpasskit' => '/classes/PHPassKit.class.php',
-          'standardkeys' => '/classes/FieldDictionaryKeys/StandardKeys.class.php'
+          'phpasskitexception' => '/classes/PHPassKitException.class.php',
+          'standardkeys' => '/classes/FieldDictionaryKeys/StandardKeys.class.php',
+          'coupon' => '/classes/Style/Coupon.class.php'
         );
 
         $path = dirname(dirname(__FILE__));
