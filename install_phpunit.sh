@@ -4,7 +4,7 @@ git clone git://github.com/sebastianbergmann/phpunit.git
 
 cd phpunit
 
-git submodule init;
+git submodule init
 
 git submodule add git://github.com/sebastianbergmann/dbunit.git
 git submodule add git://github.com/sebastianbergmann/php-file-iterator.git
