@@ -8,7 +8,8 @@ function phpasskit_autoload($class = null) {
           'phpasskit' => '/classes/PHPassKit.class.php',
           'phpasskitexception' => '/classes/PHPassKitException.class.php',
           'standardkeys' => '/classes/FieldDictionaryKeys/StandardKeys.class.php',
-          'coupon' => '/classes/Style/Coupon.class.php'
+          'coupon' => '/classes/Style/Coupon.class.php',
+          'style' => '/classes/Style/Style.class.php'
         );
 
         $path = dirname(dirname(__FILE__));
