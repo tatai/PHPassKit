@@ -6,32 +6,24 @@ use PHPassKit\FieldDictionaryKeys\StandardKeys;
 use PHPassKit\FieldDictionaryKeys\TextAlignment;
 
 class StandardKeysArrayDecorator {
-	/**
-	 * @var StandardKeys
-	 */
-	private $_keys = null;
 
-	public function __construct(StandardKeys $keys) {
-		$this->_keys = $keys;
-	}
-
-	public function decorate() {
+	public function decorate(StandardKeys $keys) {
 		$output = array(
-			'key' => $this->_keys->getKey(),
-			'value' => $this->_keys->getValue(),
+			'key' => $keys->getKey(),
+			'value' => $keys->getValue(),
 		);
 
-		$changeMessage = $this->_keys->getChangeMessage();
+		$changeMessage = $keys->getChangeMessage();
 		if(!is_null($changeMessage)) {
 			$output['changeMessage'] = $changeMessage;
 		}
 
-		$label = $this->_keys->getLabel();
+		$label = $keys->getLabel();
 		if(!is_null($label)) {
 			$output['label'] = $label;
 		}
 
-		$textAlignment = $this->_keys->getTextAlignment();
+		$textAlignment = $keys->getTextAlignment();
 		if(!is_null($textAlignment)) {
 			$output['textAlignment'] = TextAlignment::getConstName($textAlignment);
 		}

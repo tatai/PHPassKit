@@ -16,7 +16,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 
 	public function setup() {
 		$this->_pass_kit = $this->getMock('PHPassKit\PHPassKit', array(), array('a', 'a', 'a', 'a', 'a'));
-		$this->_decorator = new PHPassKitArrayDecorator($this->_pass_kit);
+		$this->_decorator = new PHPassKitArrayDecorator();
 	}
 
 	/**
@@ -25,7 +25,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	public function descriptionIsUsed() {
 		$this->_pass_kit->expects($this->once())->method('getDescription');
 
-		$this->_decorator->decorate();
+		$this->_decorator->decorate($this->_pass_kit);
 	}
 
 	/**
@@ -35,7 +35,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$description = 'PassKit description';
 		$this->_pass_kit->expects($this->any())->method('getDescription')->will($this->returnValue($description));
 
-		$output = $this->_decorator->decorate();
+		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($description, $output['description']);
 	}
@@ -46,7 +46,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	public function formatVersionIsUsed() {
 		$this->_pass_kit->expects($this->once())->method('getFormatVersion');
 
-		$this->_decorator->decorate();
+		$this->_decorator->decorate($this->_pass_kit);
 	}
 
 	/**
@@ -56,7 +56,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$formatVersion = 'PassKit format version';
 		$this->_pass_kit->expects($this->any())->method('getFormatVersion')->will($this->returnValue($formatVersion));
 
-		$output = $this->_decorator->decorate();
+		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($formatVersion, $output['formatVersion']);
 	}
@@ -67,7 +67,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	public function organizationNameIsUsed() {
 		$this->_pass_kit->expects($this->once())->method('getOrganizationName');
 
-		$this->_decorator->decorate();
+		$this->_decorator->decorate($this->_pass_kit);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$organizationName = 'PassKit organization name';
 		$this->_pass_kit->expects($this->any())->method('getOrganizationName')->will($this->returnValue($organizationName));
 
-		$output = $this->_decorator->decorate();
+		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($organizationName, $output['organizationName']);
 	}
@@ -88,7 +88,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	public function passTypeIdentifierIsUsed() {
 		$this->_pass_kit->expects($this->once())->method('getPassTypeIdentifier');
 
-		$this->_decorator->decorate();
+		$this->_decorator->decorate($this->_pass_kit);
 	}
 
 	/**
@@ -98,7 +98,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$passTypeIdentifier = 'PassKit pass type identifier';
 		$this->_pass_kit->expects($this->any())->method('getPassTypeIdentifier')->will($this->returnValue($passTypeIdentifier));
 
-		$output = $this->_decorator->decorate();
+		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($passTypeIdentifier, $output['passTypeIdentifier']);
 	}
@@ -109,7 +109,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	public function serialNumberIsUsed() {
 		$this->_pass_kit->expects($this->once())->method('getSerialNumber');
 
-		$this->_decorator->decorate();
+		$this->_decorator->decorate($this->_pass_kit);
 	}
 
 	/**
@@ -119,7 +119,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$serialNumber = 'PassKit pass type identifier';
 		$this->_pass_kit->expects($this->any())->method('getSerialNumber')->will($this->returnValue($serialNumber));
 
-		$output = $this->_decorator->decorate();
+		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($serialNumber, $output['serialNumber']);
 	}
@@ -130,7 +130,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	public function teamIdentifierIsUsed() {
 		$this->_pass_kit->expects($this->once())->method('getTeamIdentifier');
 
-		$this->_decorator->decorate();
+		$this->_decorator->decorate($this->_pass_kit);
 	}
 
 	/**
@@ -140,7 +140,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$teamIdentifier = 'PassKit pass type identifier';
 		$this->_pass_kit->expects($this->any())->method('getTeamIdentifier')->will($this->returnValue($teamIdentifier));
 
-		$output = $this->_decorator->decorate();
+		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($teamIdentifier, $output['teamIdentifier']);
 	}
