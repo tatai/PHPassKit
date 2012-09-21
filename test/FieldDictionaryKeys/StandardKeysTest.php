@@ -1,4 +1,7 @@
 <?php
+
+use PHPassKit\FieldDictionaryKeys\StandardKeys;
+
 class StandardKeysTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var StandardKeys

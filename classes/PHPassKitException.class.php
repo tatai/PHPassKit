@@ -1,4 +1,7 @@
 <?php
-class PHPassKitException extends Exception {
+
+namespace PHPassKit;
+
+class PHPassKitException extends \Exception {
 
 }

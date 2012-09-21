@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git clone git://github.com/sebastianbergmann/phpunit.git
+git clone -b 3.6 git://github.com/sebastianbergmann/phpunit.git
 
 cd phpunit
 

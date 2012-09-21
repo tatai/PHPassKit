@@ -1,4 +1,8 @@
 <?php
+
+use PHPassKit\Style\Style;
+use PHPassKit\FieldDictionaryKeys\StandardKeys;
+
 class testStyle extends Style {
 	public function __construct() {
 		parent::__construct(array('allowed'));
@@ -33,7 +37,7 @@ class StyleTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException PHPassKitException
+	 * @expectedException PHPassKit\PHPassKitException
 	 */
 	public function whenTryingToSetFieldsThatAreNotAllowedThenThrowsException() {
 		$this->_style->setFields('notAllowed', new StandardKeys('a', 'b'));

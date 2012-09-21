@@ -1,4 +1,10 @@
 <?php
+
+namespace PHPassKit\Style;
+
+use PHPassKit\FieldDictionaryKeys\StandardKeys;
+use PHPassKit\PHPassKitException;
+
 abstract class Style {
 	/**
 	 * @var array

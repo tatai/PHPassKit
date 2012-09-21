@@ -1,4 +1,7 @@
 <?php
+
+namespace PHPassKit\FieldDictionaryKeys;
+
 class StandardKeys {
 	/**
 	 * @var string

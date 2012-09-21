@@ -1,5 +1,9 @@
 <?php
 
+namespace PHPassKit;
+
+use PHPassKit\Style\Style;
+
 class PHPassKit {
 	/**
 	 * @var string

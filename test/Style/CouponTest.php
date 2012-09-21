@@ -1,4 +1,8 @@
 <?php
+
+use PHPassKit\Style\Coupon;
+use PHPassKit\FieldDictionaryKeys\StandardKeys;
+
 class CouponTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var Coupon

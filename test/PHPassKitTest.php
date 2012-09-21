@@ -1,4 +1,8 @@
 <?php
+
+use PHPassKit\PHPassKit;
+use PHPassKit\Style\Coupon;
+
 class PHPassKitTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var PHPassKit
@@ -85,7 +89,7 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function whenStyleIsGivenThenItCanBeReturned() {
-		$style = new Coupon();
+		$style = $this->getMock('PHPassKit\Style\Coupon');
 		$this->_pass_kit->setStyle($style);
 
 		$this->assertEquals($style, $this->_pass_kit->getStyle());
