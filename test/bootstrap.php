@@ -1,2 +1,2 @@
 <?php
-include_once(dirname(__FILE__) . '/../classes/Autoloader.php');
+include_once(dirname(__FILE__) . '/../lib/Autoload.php');
