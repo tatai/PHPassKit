@@ -40,6 +40,11 @@ class PHPassKit {
 	 */
 	private $_style = null;
 
+	/**
+	 * @var array of string
+	 */
+	private $_files = null;
+
 	public function __construct($description, $organizationName, $passTypeIdentifier, $serialNumber, $teamIdentifier) {
 		$this->_description = $description;
 		$this->_organization_name = $organizationName;
@@ -104,5 +109,20 @@ class PHPassKit {
 	 */
 	public function getStyle() {
 		return $this->_style;
+	}
+
+	/**
+	 * @param string $path
+	 */
+	public function addFile($path) {
+		$filename = basename($path);
+		$this->_files[$filename] = $path;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getFiles() {
+		return $this->_files;
 	}
 }

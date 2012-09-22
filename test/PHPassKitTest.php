@@ -94,4 +94,41 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($style, $this->_pass_kit->getStyle());
 	}
+
+	/**
+	 * @test
+	 */
+	public function whenOneFileIsAddedThenItsPathCanBeRetrieved() {
+		$path = '/path/to/file';
+		$this->_pass_kit->addFile($path);
+
+		$files = $this->_pass_kit->getFiles();
+		$this->assertEquals(array('file' => $path), $files);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenMoreThanOneFileIsAddedThenAllFilesCanBeRetrived() {
+		$path1 = '/path/to/file1';
+		$this->_pass_kit->addFile($path1);
+		$path2 = '/path/to/file2';
+		$this->_pass_kit->addFile($path2);
+
+		$files = $this->_pass_kit->getFiles();
+		$this->assertEquals(array('file1' => $path1, 'file2' => $path2), $files);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenOneFileIsAddedAndItAlreadyExistsInBundleThenItReplacesTheExistingOne() {
+		$path1 = '/path/to/file1';
+		$this->_pass_kit->addFile($path1);
+		$path2 = '/another/path/to/file1';
+		$this->_pass_kit->addFile($path2);
+
+		$files = $this->_pass_kit->getFiles();
+		$this->assertEquals(array('file1' => $path2), $files);
+	}
 }
