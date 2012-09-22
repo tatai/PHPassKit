@@ -2,6 +2,9 @@
 
 use PHPassKit\PHPassKit;
 use PHPassKit\Decorator\PHPassKitArrayDecorator;
+use PHPassKit\Decorator\CouponArrayDecorator;
+use PHPassKit\Decorator\StandardKeysArrayDecorator;
+use PHPassKit\Style\Coupon;
 
 class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	/**
@@ -16,7 +19,8 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 
 	public function setup() {
 		$this->_pass_kit = $this->getMock('PHPassKit\PHPassKit', array(), array('a', 'a', 'a', 'a', 'a'));
-		$this->_decorator = new PHPassKitArrayDecorator();
+		$this->_coupon_decorator = $this->getMock('PHPassKit\Decorator\CouponArrayDecorator', array(), array(new StandardKeysArrayDecorator()));
+		$this->_decorator = new PHPassKitArrayDecorator($this->_coupon_decorator);
 	}
 
 	/**
@@ -143,5 +147,28 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($teamIdentifier, $output['teamIdentifier']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function styleIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getStyle');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenStyleIsCouponThenItIsDecoratedInTheCorrectKey() {
+		$coupon = $this->getMock('PHPassKit\Style\Coupon');
+		$this->_pass_kit->expects($this->any())->method('getStyle')->will($this->returnValue($coupon));
+
+		$expected = 'decoration result';
+		$this->_coupon_decorator->expects($this->once())->method('decorate')->will($this->returnValue($expected));
+		$output = $this->_decorator->decorate($this->_pass_kit);
+
+		$this->assertEquals($expected, $output['coupon']);
 	}
 }
