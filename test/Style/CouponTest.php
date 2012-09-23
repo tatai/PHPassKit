@@ -18,9 +18,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsHeaderFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setFields('header', $keys);
+		$this->_coupon->setField('header', $keys);
 
-		$this->assertEquals($keys, $this->_coupon->getFields('header'));
+		$this->assertEquals(array($keys), $this->_coupon->getFields('header'));
 	}
 
 	/**
@@ -28,9 +28,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsPrimaryFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setFields('primary', $keys);
+		$this->_coupon->setField('primary', $keys);
 
-		$this->assertEquals($keys, $this->_coupon->getFields('primary'));
+		$this->assertEquals(array($keys), $this->_coupon->getFields('primary'));
 	}
 
 	/**
@@ -38,9 +38,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsSecondaryFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setFields('secondary', $keys);
+		$this->_coupon->setField('secondary', $keys);
 
-		$this->assertEquals($keys, $this->_coupon->getFields('secondary'));
+		$this->assertEquals(array($keys), $this->_coupon->getFields('secondary'));
 	}
 
 	/**
@@ -48,9 +48,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsAuxiliaryFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setFields('auxiliary', $keys);
+		$this->_coupon->setField('auxiliary', $keys);
 
-		$this->assertEquals($keys, $this->_coupon->getFields('auxiliary'));
+		$this->assertEquals(array($keys), $this->_coupon->getFields('auxiliary'));
 	}
 
 	/**
@@ -58,9 +58,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsBackFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setFields('back', $keys);
+		$this->_coupon->setField('back', $keys);
 
-		$this->assertEquals($keys, $this->_coupon->getFields('back'));
+		$this->assertEquals(array($keys), $this->_coupon->getFields('back'));
 	}
 
 }

@@ -28,10 +28,10 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @tes
+	 * @test
 	 */
 	public function eachGroupOfFieldsIsUsed() {
-		$this->_coupon->expects($this->exactly(2))->method('getFields');
+		$this->_coupon->expects($this->exactly(5))->method('getFields');
 
 		$this->_decorator->decorate($this->_coupon);
 	}	
@@ -49,14 +49,14 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function whenHeaderFieldsIsSetThenItIsDecorated() {
-		$headerFields = new StandardKeys('key', 'value');
+		$headerFields = array(new StandardKeys('key', 'value'));
 		$this->_coupon->expects($this->any())->method('getFields')->will($this->onConsecutiveCalls($headerFields));
 
 		$expected = 'keys decoration';
 		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->onConsecutiveCalls($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
-		$this->assertEquals($expected, $output['headerFields']);
+		$this->assertEquals(array($expected), $output['headerFields']);
 	}	
 
 	/**
@@ -72,14 +72,14 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function whenPrimaryFieldsIsSetThenItIsDecorated() {
-		$primaryFields = new StandardKeys('key', 'value');
+		$primaryFields = array(new StandardKeys('key', 'value'));
 		$this->_coupon->expects($this->any())->method('getFields')->will($this->onConsecutiveCalls(null, $primaryFields));
 
 		$expected = 'keys decoration';
 		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
-		$this->assertEquals($expected, $output['primaryFields']);
+		$this->assertEquals(array($expected), $output['primaryFields']);
 	}	
 
 	/**
@@ -95,14 +95,14 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function whenSecondaryFieldsIsSetThenItIsDecorated() {
-		$secondaryFields = new StandardKeys('key', 'value');
+		$secondaryFields = array(new StandardKeys('key', 'value'));
 		$this->_coupon->expects($this->any())->method('getFields')->will($this->onConsecutiveCalls(null, null, $secondaryFields));
 
 		$expected = 'keys decoration';
 		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
-		$this->assertEquals($expected, $output['secondaryFields']);
+		$this->assertEquals(array($expected), $output['secondaryFields']);
 	}	
 
 	/**
@@ -118,14 +118,14 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function whenAuxiliaryFieldsIsSetThenItIsDecorated() {
-		$auxiliaryFields = new StandardKeys('key', 'value');
+		$auxiliaryFields = array(new StandardKeys('key', 'value'));
 		$this->_coupon->expects($this->any())->method('getFields')->will($this->onConsecutiveCalls(null, null, null, $auxiliaryFields));
 
 		$expected = 'keys decoration';
 		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
-		$this->assertEquals($expected, $output['auxiliaryFields']);
+		$this->assertEquals(array($expected), $output['auxiliaryFields']);
 	}	
 
 	/**
@@ -141,13 +141,13 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function whenBackFieldsIsSetThenItIsDecorated() {
-		$backFields = new StandardKeys('key', 'value');
+		$backFields = array(new StandardKeys('key', 'value'));
 		$this->_coupon->expects($this->any())->method('getFields')->will($this->onConsecutiveCalls(null, null, null, null, $backFields));
 
 		$expected = 'keys decoration';
 		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
-		$this->assertEquals($expected, $output['backFields']);
+		$this->assertEquals(array($expected), $output['backFields']);
 	}	
 }

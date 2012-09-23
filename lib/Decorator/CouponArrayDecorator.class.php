@@ -30,7 +30,9 @@ class CouponArrayDecorator {
 	private function _addFields($name, &$output, Coupon $coupon) {
 		$fields = $coupon->getFields($name);
 		if(!is_null($fields)) {
-			$output[$name . 'Fields'] = $this->_keys_decorator->decorate($fields);
+			foreach($fields as $field) {
+				$output[$name . 'Fields'][] = $this->_keys_decorator->decorate($field);
+			}
 		}
 	}
 }
