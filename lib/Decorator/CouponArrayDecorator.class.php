@@ -18,20 +18,20 @@ class CouponArrayDecorator {
 	public function decorate(Coupon $coupon) {
 		$output = array();
 
-		$this->_addFields('header', $output, $coupon);
-		$this->_addFields('primary', $output, $coupon);
-		$this->_addFields('secondary', $output, $coupon);
-		$this->_addFields('auxiliary', $output, $coupon);
-		$this->_addFields('back', $output, $coupon);
+		$this->_addField('header', $output, $coupon);
+		$this->_addField('primary', $output, $coupon);
+		$this->_addField('secondary', $output, $coupon);
+		$this->_addField('auxiliary', $output, $coupon);
+		$this->_addField('back', $output, $coupon);
 
 		return $output;
 	}
 
-	private function _addFields($name, &$output, Coupon $coupon) {
-		$fields = $coupon->getFields($name);
-		if(!is_null($fields)) {
-			foreach($fields as $field) {
-				$output[$name . 'Fields'][] = $this->_keys_decorator->decorate($field);
+	private function _addField($name, &$output, Coupon $coupon) {
+		$keys = $coupon->getKeys($name);
+		if(!is_null($keys)) {
+			foreach($keys as $key) {
+				$output[$name . 'Fields'][] = $this->_keys_decorator->decorate($key);
 			}
 		}
 	}

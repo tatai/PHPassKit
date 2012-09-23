@@ -23,26 +23,33 @@ abstract class Style {
 	}
 
 	/**
-	 * Sets keys for field
+	 * Add keys for field
 	 * 
-	 * @param string		$name	name of the fields
-	 * @param StandardKeys	$keys	keys to set
+	 * @param string		$fieldName	name of the fields
+	 * @param StandardKeys	$keys		keys to set
 	 */
-	public function setField($name, StandardKeys $keys) {
-		if(!in_array($name, $this->_allowed_fields)) {
-			throw new PHPassKitException($name . ' is not valid for ' . __CLASS__);
+	public function addKeys($fieldName, StandardKeys $keys) {
+		if(!in_array($fieldName, $this->_allowed_fields)) {
+			throw new PHPassKitException($fieldName . ' is not a valid field name for ' . __CLASS__);
 		}
 
-		if(!array_key_exists($name, $this->_fields)) {
-			$this->_fields[$name] = array();
+		if(!array_key_exists($fieldName, $this->_fields)) {
+			$this->_fields[$fieldName] = array();
 		}
 
-		$this->_fields[$name][] = $keys;
+		$this->_fields[$fieldName][] = $keys;
 	}
 
-	public function getFields($name) {
-		if(isset($this->_fields[$name])) {
-			return $this->_fields[$name];
+	/**
+	 * Returns all keys for field
+	 * 
+	 * @param string	$fieldName	name of the fields
+	 * 
+	 * @return StandardKeys
+	 */
+	public function getKeys($fieldName) {
+		if(isset($this->_fields[$fieldName])) {
+			return $this->_fields[$fieldName];
 		}
 
 		return null;

@@ -24,9 +24,9 @@ class StyleTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function whenSettingOneAllowedFieldThenItCanBeRetrieved() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_style->setField('allowed', $keys);
+		$this->_style->addKeys('allowed', $keys);
 
-		$this->assertEquals(array($keys), $this->_style->getFields('allowed'));
+		$this->assertEquals(array($keys), $this->_style->getKeys('allowed'));
 	}
 
 	/**
@@ -35,17 +35,17 @@ class StyleTest extends PHPUnit_Framework_TestCase {
 	public function whenSettingMoreThanOneAllowedFieldsThenItCanBeRetrieved() {
 		$keys1 = new StandardKeys('a', 'b');
 		$keys2 = new StandardKeys('a', 'b');
-		$this->_style->setField('allowed', $keys1);
-		$this->_style->setField('allowed', $keys2);
+		$this->_style->addKeys('allowed', $keys1);
+		$this->_style->addKeys('allowed', $keys2);
 
-		$this->assertEquals(array($keys1, $keys2), $this->_style->getFields('allowed'));
+		$this->assertEquals(array($keys1, $keys2), $this->_style->getKeys('allowed'));
 	}
 
 	/**
 	 * @test
 	 */
 	public function whenAnAllowedFieldsIsNotSetThenReturnsNull() {
-		$this->assertNull($this->_style->getFields('allowed'));
+		$this->assertNull($this->_style->getKeys('allowed'));
 	}
 
 	/**
@@ -53,7 +53,7 @@ class StyleTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException PHPassKit\PHPassKitException
 	 */
 	public function whenTryingToSetFieldsThatAreNotAllowedThenThrowsException() {
-		$this->_style->setField('notAllowed', new StandardKeys('a', 'b'));
+		$this->_style->addKeys('notAllowed', new StandardKeys('a', 'b'));
 	}
 
 }

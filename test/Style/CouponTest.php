@@ -18,9 +18,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsHeaderFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setField('header', $keys);
+		$this->_coupon->addKeys('header', $keys);
 
-		$this->assertEquals(array($keys), $this->_coupon->getFields('header'));
+		$this->assertEquals(array($keys), $this->_coupon->getKeys('header'));
 	}
 
 	/**
@@ -28,9 +28,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsPrimaryFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setField('primary', $keys);
+		$this->_coupon->addKeys('primary', $keys);
 
-		$this->assertEquals(array($keys), $this->_coupon->getFields('primary'));
+		$this->assertEquals(array($keys), $this->_coupon->getKeys('primary'));
 	}
 
 	/**
@@ -38,9 +38,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsSecondaryFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setField('secondary', $keys);
+		$this->_coupon->addKeys('secondary', $keys);
 
-		$this->assertEquals(array($keys), $this->_coupon->getFields('secondary'));
+		$this->assertEquals(array($keys), $this->_coupon->getKeys('secondary'));
 	}
 
 	/**
@@ -48,9 +48,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsAuxiliaryFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setField('auxiliary', $keys);
+		$this->_coupon->addKeys('auxiliary', $keys);
 
-		$this->assertEquals(array($keys), $this->_coupon->getFields('auxiliary'));
+		$this->assertEquals(array($keys), $this->_coupon->getKeys('auxiliary'));
 	}
 
 	/**
@@ -58,9 +58,9 @@ class CouponTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function acceptsBackFields() {
 		$keys = new StandardKeys('a', 'b');
-		$this->_coupon->setField('back', $keys);
+		$this->_coupon->addKeys('back', $keys);
 
-		$this->assertEquals(array($keys), $this->_coupon->getFields('back'));
+		$this->assertEquals(array($keys), $this->_coupon->getKeys('back'));
 	}
 
 }
