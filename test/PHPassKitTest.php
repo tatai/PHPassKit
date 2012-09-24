@@ -2,6 +2,7 @@
 
 use PHPassKit\PHPassKit;
 use PHPassKit\Style\Coupon;
+use PHPassKit\Keys\LowerLevel\Barcode;
 
 class PHPassKitTest extends PHPUnit_Framework_TestCase {
 	/**
@@ -187,4 +188,15 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertTrue($this->_pass_kit->getSuppressStripShine());
 	}
+
+	/**
+	 * @test
+	 */
+	public function whenBarcodeIsSetThenItCanBeRetrieved() {
+		$barcode = $this->getMock('PHPassKit\Keys\LowerLevel\Barcode', array(), array(1, 'message', 'encoding'));
+		$this->_pass_kit->setBarcode($barcode);
+
+		$this->assertEquals($barcode, $this->_pass_kit->getBarcode());
+	}
+
 }

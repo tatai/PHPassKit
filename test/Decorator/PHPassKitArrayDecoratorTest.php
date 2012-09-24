@@ -4,6 +4,7 @@ use PHPassKit\PHPassKit;
 use PHPassKit\Decorator\PHPassKitArrayDecorator;
 use PHPassKit\Decorator\CouponArrayDecorator;
 use PHPassKit\Decorator\StandardKeysArrayDecorator;
+use PHPassKit\Decorator\BarcodeArrayDecorator;
 use PHPassKit\Style\Coupon;
 
 class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
@@ -17,10 +18,21 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	 */
 	private $_decorator = null;
 
+	/**
+	 * @var CouponArrayDecorator
+	 */
+	private $_coupon_decorator = null;
+
+	/**
+	 * @var BarcodeArrayDecorator
+	 */
+	private $_barcode_decorator = null;
+
 	public function setup() {
 		$this->_pass_kit = $this->getMock('PHPassKit\PHPassKit', array(), array('a', 'a', 'a', 'a', 'a'));
 		$this->_coupon_decorator = $this->getMock('PHPassKit\Decorator\CouponArrayDecorator', array(), array(new StandardKeysArrayDecorator()));
-		$this->_decorator = new PHPassKitArrayDecorator($this->_coupon_decorator);
+		$this->_barcode_decorator = $this->getMock('PHPassKit\Decorator\BarcodeArrayDecorator', array(), array());
+		$this->_decorator = new PHPassKitArrayDecorator($this->_coupon_decorator, $this->_barcode_decorator);
 	}
 
 	/**
@@ -343,9 +355,40 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function suppressStripShineFlagIsInTheCorrectKeyInTheOutput() {
-		$this->_pass_kit->expects($this->once())->method('getSuppressStripShine')->will($this->returnValue(true));
+		$this->_pass_kit->expects($this->any())->method('getSuppressStripShine')->will($this->returnValue(true));
 
 		$output = $this->_decorator->decorate($this->_pass_kit);
 		$this->assertTrue($output['suppressStripShine']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function barcodeFromPassKitIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getBarcode');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenBarcodeIsNotSetThenKeyIsNotPresentInTheOutput() {
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('barcode', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenPassKitHasBarcodeDefinedThenItIsDecoratedInTheCorrectKey() {
+		$barcode = $this->getMock('PHPassKit\Keys\LowerLevel\Barcode', array(), array(1, 'message', 'encoding'));
+		$this->_pass_kit->expects($this->any())->method('getBarcode')->will($this->returnValue($barcode));
+
+		$expected = 'decorator result';
+		$this->_barcode_decorator->expects($this->once())->method('decorate')->will($this->returnValue($expected));
+		$output = $this->_decorator->decorate($this->_pass_kit);
+
+		$this->assertEquals($expected, $output['barcode']);
 	}
 }

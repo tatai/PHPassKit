@@ -4,6 +4,8 @@ namespace PHPassKit\Decorator;
 
 use PHPassKit\PHPassKit;
 use PHPassKit\Style\Coupon;
+use PHPassKit\Decorator\CouponArrayDecorator;
+use PHPassKit\Decorator\BarcodeArrayDecorator;
 
 class PHPassKitArrayDecorator {
 
@@ -12,8 +14,14 @@ class PHPassKitArrayDecorator {
 	 */
 	private $_coupon_decorator = null;
 
-	public function __construct(CouponArrayDecorator $couponDecorator) {
+	/**
+	 * @var BarcodeArrayDecorator
+	 */
+	private $_barcode_decorator = null;
+
+	public function __construct(CouponArrayDecorator $couponDecorator, BarcodeArrayDecorator $barcodeDecorator) {
 		$this->_coupon_decorator = $couponDecorator;
+		$this->_barcode_decorator = $barcodeDecorator;
 	}
 
 	/**
@@ -35,6 +43,11 @@ class PHPassKitArrayDecorator {
 		$style = $passKit->getStyle();
 		if(!is_null($style) && $style instanceof Coupon) {
 			$output['coupon'] = $this->_coupon_decorator->decorate($style);
+		}
+
+		$barcode = $passKit->getBarcode();
+		if(!is_null($barcode)) {
+			$output['barcode'] = $this->_barcode_decorator->decorate($barcode);
 		}
 
 		$this->_decorateColor($output, 'backgroundColor', $passKit->getBackgroundColor());

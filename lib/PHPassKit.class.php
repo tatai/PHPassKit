@@ -3,6 +3,7 @@
 namespace PHPassKit;
 
 use PHPassKit\Style\Style;
+use PHPassKit\Keys\LowerLevel\Barcode;
 
 class PHPassKit {
 	/**
@@ -69,6 +70,11 @@ class PHPassKit {
 	 * @var boolean
 	 */
 	private $_suppress_strip_shine = null;
+
+	/**
+	 * @var Barcode
+	 */
+	private $_barcode = null;
 
 	public function __construct($description, $organizationName, $passTypeIdentifier, $serialNumber, $teamIdentifier) {
 		$this->_description = $description;
@@ -226,5 +232,19 @@ class PHPassKit {
 	 */
 	public function setSuppressStripShine($suppress) {
 		$this->_suppress_strip_shine = $suppress;
+	}
+
+	/**
+	 * @param Barcode $barcode
+	 */
+	public function setBarcode(Barcode $barcode) {
+		$this->_barcode = $barcode;
+	}
+
+	/**
+	 * @return Barcode
+	 */
+	public function getBarcode() {
+		return $this->_barcode;
 	}
 }

@@ -23,6 +23,12 @@ class Barcode {
 	 */
 	private $_alternate_text = null;
 
+	/**
+	 * 
+	 * @param int 		$format 	@see BarcodeFormat
+	 * @param string 	$message
+	 * @param string 	$encoding 	IANA character set name
+	 */
 	public function __construct($format, $message, $encoding) {
 		$this->_format = $format;
 		$this->_message = $message;
