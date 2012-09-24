@@ -28,7 +28,8 @@ class PHPassKitArrayDecorator {
 			'organizationName' => $passKit->getOrganizationName(),
 			'passTypeIdentifier' => $passKit->getPassTypeIdentifier(),
 			'serialNumber' => $passKit->getSerialNumber(),
-			'teamIdentifier' => $passKit->getTeamIdentifier()
+			'teamIdentifier' => $passKit->getTeamIdentifier(),
+			'suppressStripShine' => $passKit->getSuppressStripShine()
 		);
 
 		$style = $passKit->getStyle();
@@ -36,6 +37,21 @@ class PHPassKitArrayDecorator {
 			$output['coupon'] = $this->_coupon_decorator->decorate($style);
 		}
 
+		$this->_decorateColor($output, 'backgroundColor', $passKit->getBackgroundColor());
+		$this->_decorateColor($output, 'foregroundColor', $passKit->getForegroundColor());
+		$this->_decorateColor($output, 'labelColor', $passKit->getLabelColor());
+
+		$logoText = $passKit->getLogoText();
+		if(!is_null($logoText)) {
+			$output['logoText'] = $logoText;
+		}
+
 		return $output;
+	}
+
+	private function _decorateColor(&$output, $key, $color = null) {
+		if(!is_null($color) && is_array($color) && count($color) == 3) {
+			$output[$key] = sprintf('rgb(%d, %d, %d)', $color[0], $color[1], $color[2]);
+		}
 	}
 }

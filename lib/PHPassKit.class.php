@@ -45,6 +45,31 @@ class PHPassKit {
 	 */
 	private $_files = null;
 
+	/**
+	 * @var array
+	 */
+	private $_background_color = null;
+
+	/**
+	 * @var array
+	 */
+	private $_foreground_color = null;
+
+	/**
+	 * @var array
+	 */
+	private $_label_color = null;
+
+	/**
+	 * @var string
+	 */
+	private $_logo_text = null;
+
+	/**
+	 * @var boolean
+	 */
+	private $_suppress_strip_shine = null;
+
 	public function __construct($description, $organizationName, $passTypeIdentifier, $serialNumber, $teamIdentifier) {
 		$this->_description = $description;
 		$this->_organization_name = $organizationName;
@@ -53,6 +78,7 @@ class PHPassKit {
 		$this->_team_identifier = $teamIdentifier;
 
 		$this->_format_version = 1;
+		$this->_suppress_strip_shine = false;
 	}
 
 	/**
@@ -124,5 +150,81 @@ class PHPassKit {
 	 */
 	public function getFiles() {
 		return $this->_files;
+	}
+
+	/**
+	 * @param int $red 		red value 0..255
+	 * @param int $green 	green value 0..255
+	 * @param int $blue 	blue value 0..255
+	 */
+	public function setBackgroundColor($red, $green, $blue) {
+		$this->_background_color = array($red, $green, $blue);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getBackgroundColor() {
+		return $this->_background_color;
+	}
+
+	/**
+	 * @param int $red 		red value 0..255
+	 * @param int $green 	green value 0..255
+	 * @param int $blue 	blue value 0..255
+	 */
+	public function setForegroundColor($red, $green, $blue) {
+		$this->_foreground_color = array($red, $green, $blue);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getForegroundColor() {
+		return $this->_foreground_color;
+	}
+
+	/**
+	 * @param int $red 		red value 0..255
+	 * @param int $green 	green value 0..255
+	 * @param int $blue 	blue value 0..255
+	 */
+	public function setLabelColor($red, $green, $blue) {
+		$this->_label_color = array($red, $green, $blue);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getLabelColor() {
+		return $this->_label_color;
+	}
+
+	/**
+	 * @param string $text
+	 */
+	public function setLogoText($text) {
+		$this->_logo_text = $text;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLogoText() {
+		return $this->_logo_text;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getSuppressStripShine() {
+		return $this->_suppress_strip_shine;
+	}
+
+	/**
+	 * @param boolean $suppress
+	 */
+	public function setSuppressStripShine($suppress) {
+		$this->_suppress_strip_shine = $suppress;
 	}
 }

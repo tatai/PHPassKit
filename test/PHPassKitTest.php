@@ -131,4 +131,60 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 		$files = $this->_pass_kit->getFiles();
 		$this->assertEquals(array('file1' => $path2), $files);
 	}
+
+	/**
+	 * @test
+	 */
+	public function backgroundColorCanBeRetrieved() {
+		$color = array(21, 43, 199);
+		$this->_pass_kit->setBackgroundColor($color[0], $color[1], $color[2]);
+
+		$this->assertEquals($color, $this->_pass_kit->getBackgroundColor());
+	}
+
+	/**
+	 * @test
+	 */
+	public function foregroundColorCanBeRetrieved() {
+		$color = array(0, 21, 255);
+		$this->_pass_kit->setForegroundColor($color[0], $color[1], $color[2]);
+
+		$this->assertEquals($color, $this->_pass_kit->getForegroundColor());
+	}
+
+	/**
+	 * @test
+	 */
+	public function labelColorCanBeRetrieved() {
+		$color = array(54, 193, 23);
+		$this->_pass_kit->setLabelColor($color[0], $color[1], $color[2]);
+
+		$this->assertEquals($color, $this->_pass_kit->getLabelColor());
+	}
+
+	/**
+	 * @test
+	 */
+	public function logoTextCanBeRetrieved() {
+		$logoText = 'logo text';
+		$this->_pass_kit->setLogoText($logoText);
+
+		$this->assertEquals($logoText, $this->_pass_kit->getLogoText());
+	}
+
+	/**
+	 * @test
+	 */
+	public function defaultValueOfSuppressStripShineIsFalse() {
+		$this->assertFalse($this->_pass_kit->getSuppressStripShine());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenSuppressStripShineIsChangedThenItsValueCanBeRetrieved() {
+		$this->_pass_kit->setSuppressStripShine(true);
+
+		$this->assertTrue($this->_pass_kit->getSuppressStripShine());
+	}
 }

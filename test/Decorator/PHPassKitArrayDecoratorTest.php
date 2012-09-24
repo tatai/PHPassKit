@@ -171,4 +171,181 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($expected, $output['coupon']);
 	}
+
+	/**
+	 * @test
+	 */
+	public function backgroundColorIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getBackgroundColor');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenBackgroundColorIsNotAnArrayThenOutputDoesNotHaveTheValue() {
+		$this->_pass_kit->expects($this->any())->method('getBackgroundColor')->will($this->returnValue('a'));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('backgroundColor', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenBackgroundColorIsNotAnArrayWithThreeValuesThenOutputDoesNotHaveTheValue() {
+		$this->_pass_kit->expects($this->any())->method('getBackgroundColor')->will($this->returnValue(array(12, 32)));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('backgroundColor', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenBackgroundColorIsSetThenItIsAtTheCorrectKeyInTheOutput() {
+		$color = array(23, 54, 127);
+		$this->_pass_kit->expects($this->any())->method('getBackgroundColor')->will($this->returnValue($color));
+
+		$expected = sprintf('rgb(%d, %d, %d)', $color[0], $color[1], $color[2]);
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertEquals($expected, $output['backgroundColor']);
+	}
+
+
+	/**
+	 * @test
+	 */
+	public function foregroundColorIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getForegroundColor');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenForegroundColorIsNotAnArrayThenOutputDoesNotHaveTheValue() {
+		$this->_pass_kit->expects($this->any())->method('getForegroundColor')->will($this->returnValue('a'));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('foregroundColor', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenForegroundColorIsNotAnArrayWithThreeValuesThenOutputDoesNotHaveTheValue() {
+		$this->_pass_kit->expects($this->any())->method('getForegroundColor')->will($this->returnValue(array(12, 32)));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('foregroundColor', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenForegroundColorIsSetThenItIsAtTheCorrectKeyInTheOutput() {
+		$color = array(23, 54, 127);
+		$this->_pass_kit->expects($this->any())->method('getForegroundColor')->will($this->returnValue($color));
+
+		$expected = sprintf('rgb(%d, %d, %d)', $color[0], $color[1], $color[2]);
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertEquals($expected, $output['foregroundColor']);
+	}
+
+
+	/**
+	 * @test
+	 */
+	public function labelColorIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getLabelColor');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenLabelColorIsNotAnArrayThenOutputDoesNotHaveTheValue() {
+		$this->_pass_kit->expects($this->any())->method('getLabelColor')->will($this->returnValue('a'));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('labelColor', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenLabelColorIsNotAnArrayWithThreeValuesThenOutputDoesNotHaveTheValue() {
+		$this->_pass_kit->expects($this->any())->method('getLabelColor')->will($this->returnValue(array(12, 32)));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('labelColor', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenLabelColorIsSetThenItIsAtTheCorrectKeyInTheOutput() {
+		$color = array(23, 54, 127);
+		$this->_pass_kit->expects($this->any())->method('getLabelColor')->will($this->returnValue($color));
+
+		$expected = sprintf('rgb(%d, %d, %d)', $color[0], $color[1], $color[2]);
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertEquals($expected, $output['labelColor']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function logoTextIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getLogoText');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenLogoTextIsNotSetThenOutputDoesNotHaveTheValue() {
+		$this->_pass_kit->expects($this->any())->method('getLogoText');
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('logoText', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenLogoTextIsSetThenItIsDecoratedInTheCorrectKey() {
+		$text = 'logo text';
+		$this->_pass_kit->expects($this->any())->method('getLogoText')->will($this->returnValue($text));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertEquals($text, $output['logoText']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function suppressStripShineFlagIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getSuppressStripShine');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function suppressStripShineFlagIsInTheCorrectKeyInTheOutput() {
+		$this->_pass_kit->expects($this->once())->method('getSuppressStripShine')->will($this->returnValue(true));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertTrue($output['suppressStripShine']);
+	}
 }
