@@ -11,7 +11,9 @@ function Autoloader($class = null) {
 	}
 
 	$path = __DIR__ . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $parts) . '.class.php';
-	return include_once($path);
+	if(file_exists(($path))) {
+		return include_once($path);
+	}
 }
 
 spl_autoload_register(__NAMESPACE__ . '\Autoloader');
