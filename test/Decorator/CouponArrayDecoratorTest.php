@@ -3,7 +3,7 @@
 use PHPassKit\Decorator\CouponArrayDecorator;
 use PHPassKit\Decorator\StandardKeysArrayDecorator;
 use PHPassKit\Style\Coupon;
-use PHPassKit\FieldDictionaryKeys\StandardKeys;
+use PHPassKit\Keys\FieldDictionary\StandardKeys;
 
 class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	/**

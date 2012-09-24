@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPassKit\FieldDictionaryKeys;
+namespace PHPassKit\Keys\FieldDictionary;
 
 class TextAlignment {
 	const LEFT		= 1;

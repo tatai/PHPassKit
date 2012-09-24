@@ -1,7 +1,7 @@
 <?php
 
 use PHPassKit\Style\Style;
-use PHPassKit\FieldDictionaryKeys\StandardKeys;
+use PHPassKit\Keys\FieldDictionary\StandardKeys;
 
 class testStyle extends Style {
 	public function __construct() {

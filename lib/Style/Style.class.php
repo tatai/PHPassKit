@@ -2,7 +2,7 @@
 
 namespace PHPassKit\Style;
 
-use PHPassKit\FieldDictionaryKeys\StandardKeys;
+use PHPassKit\Keys\FieldDictionary\StandardKeys;
 use PHPassKit\PHPassKitException;
 
 abstract class Style {

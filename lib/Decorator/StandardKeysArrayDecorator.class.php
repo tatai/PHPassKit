@@ -2,8 +2,8 @@
 
 namespace PHPassKit\Decorator;
 
-use PHPassKit\FieldDictionaryKeys\StandardKeys;
-use PHPassKit\FieldDictionaryKeys\TextAlignment;
+use PHPassKit\Keys\FieldDictionary\StandardKeys;
+use PHPassKit\Keys\FieldDictionary\TextAlignment;
 
 class StandardKeysArrayDecorator {
 

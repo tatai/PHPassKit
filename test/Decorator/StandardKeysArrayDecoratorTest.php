@@ -1,7 +1,7 @@
 <?php
 
 use PHPassKit\Decorator\StandardKeysArrayDecorator;
-use PHPassKit\FieldDictionaryKeys\TextAlignment;
+use PHPassKit\Keys\FieldDictionary\TextAlignment;
 
 class StandardKeysArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 
@@ -16,7 +16,7 @@ class StandardKeysArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	private $_decorator = null;
 
 	public function setup() {
-		$this->_keys = $this->getMock('PHPassKit\FieldDictionaryKeys\StandardKeys', array(), array('key', 'value'));
+		$this->_keys = $this->getMock('PHPassKit\Keys\FieldDictionary\StandardKeys', array(), array('key', 'value'));
 		$this->_decorator = new StandardKeysArrayDecorator();
 	}
 
