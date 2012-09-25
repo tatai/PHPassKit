@@ -113,6 +113,7 @@ class PHPassKit {
 		$this->_format_version = 1;
 		$this->_suppress_strip_shine = false;
 		$this->_locations = array();
+		$this->_files = array();
 	}
 
 	/**
