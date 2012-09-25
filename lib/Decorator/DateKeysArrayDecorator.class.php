@@ -11,6 +11,7 @@ class DateKeysArrayDecorator extends FieldDictionaryArrayDecorator {
 		$output = parent::decorate($dateKeys);
 
 		$output['isRelative'] = $dateKeys->getIsRelative();
+		$output['value'] = date('c', $dateKeys->getValue());
 
 		$dateStyle = $dateKeys->getDateStyle();
 		if(!is_null($dateStyle)) {

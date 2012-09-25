@@ -102,4 +102,24 @@ class DateKeysArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$output = $this->_decorator->decorate($this->_date_keys);
 		$this->assertTrue($output['isRelative']);
 	}
+
+	/**
+	 * @test
+	 */
+	public function valueFromKeysIsUsed() {
+		$this->_date_keys->expects($this->once())->method('getValue');
+
+		$this->_decorator->decorate($this->_date_keys);
+	}
+
+	/**
+	 * @test
+	 */
+	public function valueIsInTheOutputInIso8601Format() {
+		$time = mktime(12, 4, 2, 9, 25, 2012);
+		$this->_date_keys->expects($this->any())->method('getValue')->will($this->returnValue($time));
+
+		$output = $this->_decorator->decorate($this->_date_keys);
+		$this->assertEquals(date('c', $time), $output['value']);
+	}
 }
