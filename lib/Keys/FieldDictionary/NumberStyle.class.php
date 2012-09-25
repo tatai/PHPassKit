@@ -10,16 +10,16 @@ class NumberStyle {
 
 	static public function getConstName($style) {
 		switch ($style) {
-			case DateStyle::DECIMAL:
+			case NumberStyle::DECIMAL:
 				return 'PKNumberStyleDecimal';
 				break;
-			case DateStyle::PERCENT:
+			case NumberStyle::PERCENT:
 				return 'PKNumberStylePercent';
 				break;
-			case DateStyle::SCIENTIFIC:
+			case NumberStyle::SCIENTIFIC:
 				return 'PKNumberStyleScientific';
 				break;
-			case DateStyle::SPELLOUT:
+			case NumberStyle::SPELLOUT:
 				return 'PKNumberStyleSpellOut';
 				break;
 		}
