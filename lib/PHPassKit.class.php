@@ -4,6 +4,7 @@ namespace PHPassKit;
 
 use PHPassKit\Style\Style;
 use PHPassKit\Keys\LowerLevel\Barcode;
+use PHPassKit\PHPassKitException;
 
 class PHPassKit {
 	/**
@@ -91,7 +92,17 @@ class PHPassKit {
 	 * @var string
 	 */
 	private $_relevant_date = null;
-			
+
+	/**
+	 * @var string
+	 */
+	private $_web_service_url = null;
+
+	/**
+	 * @var string
+	 */
+	private $_authentication_token = null;
+
 	public function __construct($description, $organizationName, $passTypeIdentifier, $serialNumber, $teamIdentifier) {
 		$this->_description = $description;
 		$this->_organization_name = $organizationName;
@@ -306,6 +317,8 @@ class PHPassKit {
 	 * Sets the relevant date. Use YYYY-MM-DD format or timestamp
 	 * 
 	 * @param string $date YYYY-MM-DD or timestamp
+	 *
+	 * @throws  PHPassKitException
 	 */
 	public function setRelevantDate($date) {
 		if(preg_match('/^([0-9]{4})-([0-9]{2})-([0-9]{2})/', $date, $matches)) {
@@ -314,6 +327,37 @@ class PHPassKit {
 		else if(preg_match('/^[0-9]+$/', $date)) {
 			$this->_relevant_date = $date;
 		}
+		else {
+			throw new PHPassKitException('Date does not have the correct format. Use YYYY-MM-DD or timestamp');
+		}
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getWebServiceUrl() {
+		return $this->_web_service_url;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getAuthenticationToken() {
+		return $this->_authentication_token;
+	}
+
+	/**
+	 * @param string $url
+	 * @param string $token
+	 *
+	 * @throws  PHPassKitException
+	 */
+	public function setWebService($url, $token) {
+		if(strlen($token) < 16) {
+			throw new PHPassKitException('Web service authentication token must be 16 characters or longer');
+		}
+
+		$this->_web_service_url = $url;
+		$this->_authentication_token = $token;
+	}
 }

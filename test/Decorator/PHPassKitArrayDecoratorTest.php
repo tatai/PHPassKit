@@ -522,4 +522,62 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(date('c', $timestamp), $output['relevantDate']);
 	}
 
+	/**
+	 * @test
+	 */
+	public function webServiceUrlIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getWebServiceUrl');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenWebServiceIsNotGivenThenUrlKeyDoesNotExists() {
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('webServiceURL', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenWebServiceIsGivenThenUrlKeyIsInTheOutput() {
+		$url = 'http://url';
+		$this->_pass_kit->expects($this->any())->method('getWebServiceUrl')->will($this->returnValue($url));
+		$this->_pass_kit->expects($this->any())->method('getAuthenticationToken')->will($this->returnValue(''));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertEquals($url, $output['webServiceURL']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function webServiceAuthenticationTokenIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getAuthenticationToken');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenWebServiceIsNotGivenThenAuthenticationTokenKeyDoesNotExists() {
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('authenticationToken', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenWebServiceIsNotGivenThenAuthenticationTokenIsInTheOutput() {
+		$token = 'token';
+		$this->_pass_kit->expects($this->any())->method('getAuthenticationToken')->will($this->returnValue($token));
+		$this->_pass_kit->expects($this->any())->method('getWebServiceUrl')->will($this->returnValue(''));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertEquals($token, $output['authenticationToken']);
+	}
+
 }

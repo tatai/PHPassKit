@@ -291,11 +291,53 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
+	 * @expectedException PHPassKit\PHPassKitException
 	 */
-	public function whenRelevantDateIsNotGivenInTheCorrectFormatThenItReturnsNull() {
+	public function whenRelevantDateIsNotGivenInTheCorrectFormatThenThrowsException() {
 		$date = 'Sep 25, 2012';
 		$this->_pass_kit->setRelevantDate($date);
+	}
 
-		$this->assertNull($this->_pass_kit->getRelevantDate());
+	/**
+	 * @test
+	 */
+	public function whenWebServiceIsNotSetThenUrlIsNull() {
+		$this->assertNull($this->_pass_kit->getWebServiceUrl());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenWebServiceIsNotSetThenTokenIsNull() {
+		$this->assertNull($this->_pass_kit->getAuthenticationToken());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenWebServiceUrlIsGivenThenItCanBeRetrieved() {
+		$url = 'https://url/to';
+		$this->_pass_kit->setWebService($url, '1234567890123456');
+
+		$this->assertEquals($url, $this->_pass_kit->getWebServiceUrl());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenWebServiceTokenIsGivenThenItCanBeRetrieved() {
+		$token= '1234567890123456';
+		$this->_pass_kit->setWebService('', $token);
+
+		$this->assertEquals($token, $this->_pass_kit->getAuthenticationToken());
+	}
+
+	/**
+	 * @test
+	 * @expectedException PHPassKit\PHPassKitException
+	 */
+	public function whenTokenHasLessThan16CharsThenThrowsException() {
+		$token= '1234567890';
+		$this->_pass_kit->setWebService('', $token);
 	}
 }

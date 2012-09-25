@@ -75,6 +75,13 @@ class PHPassKitArrayDecorator {
 			$output['relevantDate'] = date('c', $relevantDate);
 		}
 
+		$authenticationToken = $passKit->getAuthenticationToken();
+		$webServiceUrl = $passKit->getWebServiceUrl();
+		if(!is_null($authenticationToken) && !is_null($webServiceUrl)) {
+			$output['authenticationToken'] = $authenticationToken;
+			$output['webServiceURL'] = $webServiceUrl;
+		}
+
 		return $output;
 	}
 
