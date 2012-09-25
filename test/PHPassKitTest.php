@@ -230,4 +230,35 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(array($location1, $location2, $location3), $this->_pass_kit->getLocations());
 	}
+
+	/**
+	 * @test
+	 */
+	public function whenNoAssociateAppIsGivenThenNullIsReturned() {
+		$this->assertNull($this->_pass_kit->getAssociatedApps());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenOneAssociatedAppIsGivenThenItCanBeReturnedInTheListOfAssociatedApps() {
+		$id = 'ASDF1234';
+		$this->_pass_kit->addAssociatedApp($id);
+
+		$this->assertEquals(array($id), $this->_pass_kit->getAssociatedApps());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenSeveralAssociatedAppsAreGivenThenTheyCanBeReturnedInTheListOfAssociatedApps() {
+		$id1 = 'ASDF1234';
+		$this->_pass_kit->addAssociatedApp($id1);
+		$id2 = 'KSL32';
+		$this->_pass_kit->addAssociatedApp($id2);
+		$id3 = '09SPOJH2';
+		$this->_pass_kit->addAssociatedApp($id3);
+
+		$this->assertEquals(array($id1, $id2, $id3), $this->_pass_kit->getAssociatedApps());
+	}
 }

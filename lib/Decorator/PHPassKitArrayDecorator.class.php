@@ -57,6 +57,11 @@ class PHPassKitArrayDecorator {
 			$output['barcode'] = $this->_barcode_decorator->decorate($barcode);
 		}
 
+		$associatedApps = $passKit->getAssociatedApps();
+		if(is_array($associatedApps) && count($associatedApps) > 0) {
+			$output['associatedStoreIdentifiers'] = $associatedApps;
+		}
+
 		$this->_decorateColor($output, 'backgroundColor', $passKit->getBackgroundColor());
 		$this->_decorateColor($output, 'foregroundColor', $passKit->getForegroundColor());
 		$this->_decorateColor($output, 'labelColor', $passKit->getLabelColor());
@@ -64,6 +69,7 @@ class PHPassKitArrayDecorator {
 		$this->_setOptional($output, 'logoText', $passKit->getLogoText());
 
 		$this->_decorateLocations($output, $passKit);
+
 
 		return $output;
 	}

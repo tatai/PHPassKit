@@ -47,17 +47,17 @@ class PHPassKit {
 	private $_files = null;
 
 	/**
-	 * @var array
+	 * @var array of int
 	 */
 	private $_background_color = null;
 
 	/**
-	 * @var array
+	 * @var array of int
 	 */
 	private $_foreground_color = null;
 
 	/**
-	 * @var array
+	 * @var array of int
 	 */
 	private $_label_color = null;
 
@@ -77,10 +77,15 @@ class PHPassKit {
 	private $_barcode = null;
 
 	/**
-	 * @var array
+	 * @var array of Location
 	 */
 	private $_locations = null;
 
+	/**
+	 * @var array of string
+	 */
+	private $_associated_apps = null;
+	
 	public function __construct($description, $organizationName, $passTypeIdentifier, $serialNumber, $teamIdentifier) {
 		$this->_description = $description;
 		$this->_organization_name = $organizationName;
@@ -266,5 +271,19 @@ class PHPassKit {
 	 */
 	public function getLocations() {
 		return $this->_locations;
+	}
+
+	/**
+	 * @return array of string
+	 */
+	public function getAssociatedApps() {
+		return $this->_associated_apps;
+	}
+
+	/**
+	 * @param string $appId Adam ID
+	 */
+	public function addAssociatedApp($appId) {
+		$this->_associated_apps[] = $appId;
 	}
 }

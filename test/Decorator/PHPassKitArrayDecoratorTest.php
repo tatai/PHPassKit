@@ -455,4 +455,42 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(array($decorator1, $decorator2), $output['locations']);
 	}
+
+	/**
+	 * @test
+	 */
+	public function associatedAppsFromPassKitIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getAssociatedApps');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenAssociatedAppsIsNotSetThenKeyIsNotPresentInTheOutput() {
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('associatedStoreIdentifiers', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenThereIsNoAssociatedAppsSetThenKeyIsNotPresentInTheOutput() {
+		$this->_pass_kit->expects($this->any())->method('getAssociatedApps')->will($this->returnValue(array()));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('associatedStoreIdentifiers', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenPassKitHasAssociatedAppsDefinedThenTheOutputHasTheCorrectKey() {
+		$apps = array('id', 'another');
+		$this->_pass_kit->expects($this->any())->method('getAssociatedApps')->will($this->returnValue($apps));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertEquals($apps, $output['associatedStoreIdentifiers']);
+	}
 }
