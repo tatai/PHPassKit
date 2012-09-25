@@ -2,31 +2,16 @@
 
 namespace PHPassKit\Decorator;
 
+use PHPassKit\Decorator\FieldDictionaryArrayDecorator;
 use PHPassKit\Keys\FieldDictionary\StandardKeys;
 use PHPassKit\Keys\FieldDictionary\TextAlignment;
 
-class StandardKeysArrayDecorator {
+class StandardKeysArrayDecorator extends FieldDictionaryArrayDecorator {
 
 	public function decorate(StandardKeys $keys) {
-		$output = array(
-			'key' => $keys->getKey(),
-			'value' => $keys->getValue(),
-		);
+		$output = parent::decorate($keys);
 
-		$changeMessage = $keys->getChangeMessage();
-		if(!is_null($changeMessage)) {
-			$output['changeMessage'] = $changeMessage;
-		}
-
-		$label = $keys->getLabel();
-		if(!is_null($label)) {
-			$output['label'] = $label;
-		}
-
-		$textAlignment = $keys->getTextAlignment();
-		if(!is_null($textAlignment)) {
-			$output['textAlignment'] = TextAlignment::getConstName($textAlignment);
-		}
+		$output['value'] = $keys->getValue();
 
 		return $output;
 	}
