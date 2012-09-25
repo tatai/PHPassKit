@@ -7,7 +7,7 @@ use PHPassKit\Keys\FieldDictionary\NumberKeys;
 use PHPassKit\Keys\FieldDictionary\NumberStyle;
 
 class NumberKeysArrayDecorator extends FieldDictionaryArrayDecorator {
-	public function decorate(NumberKeys $numberKeys) {
+	public function decorate($numberKeys) {
 		$output = parent::decorate($numberKeys);
 
 		$output['value'] = $numberKeys->getValue();

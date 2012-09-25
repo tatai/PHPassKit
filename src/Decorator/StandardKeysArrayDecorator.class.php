@@ -8,7 +8,7 @@ use PHPassKit\Keys\FieldDictionary\TextAlignment;
 
 class StandardKeysArrayDecorator extends FieldDictionaryArrayDecorator {
 
-	public function decorate(StandardKeys $keys) {
+	public function decorate($keys) {
 		$output = parent::decorate($keys);
 
 		$output['value'] = $keys->getValue();

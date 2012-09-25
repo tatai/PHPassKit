@@ -6,7 +6,7 @@ use PHPassKit\Keys\FieldDictionary\FieldDictionary;
 
 abstract class FieldDictionaryArrayDecorator {
 
-	public function decorate(FieldDictionary $keys) {
+	public function decorate($keys) {
 		$output = array(
 			'key' => $keys->getKey()
 		);

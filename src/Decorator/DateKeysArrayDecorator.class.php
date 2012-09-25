@@ -7,7 +7,7 @@ use PHPassKit\Keys\FieldDictionary\DateKeys;
 use PHPassKit\Keys\FieldDictionary\DateStyle;
 
 class DateKeysArrayDecorator extends FieldDictionaryArrayDecorator {
-	public function decorate(DateKeys $dateKeys) {
+	public function decorate($dateKeys) {
 		$output = parent::decorate($dateKeys);
 
 		$output['isRelative'] = $dateKeys->getIsRelative();

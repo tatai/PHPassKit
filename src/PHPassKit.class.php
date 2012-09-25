@@ -174,9 +174,12 @@ class PHPassKit {
 
 	/**
 	 * @param string $path
+	 * @param string $filename
 	 */
-	public function addFile($path) {
-		$filename = basename($path);
+	public function addFile($path, $filename = null) {
+		if(is_null($filename)) {
+			$filename = basename($path);
+		}
 		$this->_files[$filename] = $path;
 	}
 
