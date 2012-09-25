@@ -4,6 +4,7 @@ use PHPassKit\PHPassKit;
 use PHPassKit\Decorator\PHPassKitArrayDecorator;
 use PHPassKit\Decorator\CouponArrayDecorator;
 use PHPassKit\Decorator\StandardKeysArrayDecorator;
+use PHPassKit\Decorator\LocationArrayDecorator;
 use PHPassKit\Decorator\BarcodeArrayDecorator;
 use PHPassKit\Style\Coupon;
 
@@ -28,11 +29,17 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	 */
 	private $_barcode_decorator = null;
 
+	/**
+	 * @var LocationArrayDecorator
+	 */
+	private $_location_decorator = null;
+
 	public function setup() {
 		$this->_pass_kit = $this->getMock('PHPassKit\PHPassKit', array(), array('a', 'a', 'a', 'a', 'a'));
 		$this->_coupon_decorator = $this->getMock('PHPassKit\Decorator\CouponArrayDecorator', array(), array(new StandardKeysArrayDecorator()));
 		$this->_barcode_decorator = $this->getMock('PHPassKit\Decorator\BarcodeArrayDecorator', array(), array());
-		$this->_decorator = new PHPassKitArrayDecorator($this->_coupon_decorator, $this->_barcode_decorator);
+		$this->_location_decorator = $this->getMock('PHPassKit\Decorator\LocationArrayDecorator', array(), array());
+		$this->_decorator = new PHPassKitArrayDecorator($this->_coupon_decorator, $this->_barcode_decorator, $this->_location_decorator);
 	}
 
 	/**
@@ -390,5 +397,62 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($expected, $output['barcode']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function locationsFromPassKitIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getLocations');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenLocationsIsNotSetThenKeyIsNotPresentInTheOutput() {
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('locations', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenThereIsNoLocationsSetThenKeyIsNotPresentInTheOutput() {
+		$this->_pass_kit->expects($this->any())->method('getLocations')->will($this->returnValue(array()));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('locations', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenPassKitHasAtLeastOneLocationDefinedThenItIsDecoratedInTheCorrectKey() {
+		$location = $this->getMock('PHPassKit\Keys\LowerLevel\Location', array(), array(0, 0));
+		$this->_pass_kit->expects($this->any())->method('getLocations')->will($this->returnValue(array($location)));
+
+		$expected = 'decorator result';
+		$this->_location_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
+		$output = $this->_decorator->decorate($this->_pass_kit);
+
+		$this->assertEquals(array($expected), $output['locations']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenPassKitHasMoreThanOneLocationDefinedThenTheyAreDecoratedInTheCorrectKey() {
+		$location1 = $this->getMock('PHPassKit\Keys\LowerLevel\Location', array(), array(1, 2));
+		$location2 = $this->getMock('PHPassKit\Keys\LowerLevel\Location', array(), array(3, 4));
+		$this->_pass_kit->expects($this->any())->method('getLocations')->will($this->returnValue(array($location1, $location2)));
+
+		$decorator1 = 'decorator result1';
+		$decorator2 = 'decorator result1';
+		$this->_location_decorator->expects($this->any())->method('decorate')->will($this->onConsecutiveCalls($decorator1, $decorator2));
+		$output = $this->_decorator->decorate($this->_pass_kit);
+
+		$this->assertEquals(array($decorator1, $decorator2), $output['locations']);
 	}
 }

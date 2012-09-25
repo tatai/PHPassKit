@@ -76,6 +76,11 @@ class PHPassKit {
 	 */
 	private $_barcode = null;
 
+	/**
+	 * @var array
+	 */
+	private $_locations = null;
+
 	public function __construct($description, $organizationName, $passTypeIdentifier, $serialNumber, $teamIdentifier) {
 		$this->_description = $description;
 		$this->_organization_name = $organizationName;
@@ -85,6 +90,7 @@ class PHPassKit {
 
 		$this->_format_version = 1;
 		$this->_suppress_strip_shine = false;
+		$this->_locations = array();
 	}
 
 	/**
@@ -246,5 +252,19 @@ class PHPassKit {
 	 */
 	public function getBarcode() {
 		return $this->_barcode;
+	}
+
+	/**
+	 * @param Location $location
+	 */
+	public function addLocation($location) {
+		$this->_locations[] = $location;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getLocations() {
+		return $this->_locations;
 	}
 }

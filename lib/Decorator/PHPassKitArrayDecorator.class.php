@@ -6,6 +6,7 @@ use PHPassKit\PHPassKit;
 use PHPassKit\Style\Coupon;
 use PHPassKit\Decorator\CouponArrayDecorator;
 use PHPassKit\Decorator\BarcodeArrayDecorator;
+use PHPassKit\Decorator\LocationArrayDecorator;
 
 class PHPassKitArrayDecorator {
 
@@ -19,9 +20,15 @@ class PHPassKitArrayDecorator {
 	 */
 	private $_barcode_decorator = null;
 
-	public function __construct(CouponArrayDecorator $couponDecorator, BarcodeArrayDecorator $barcodeDecorator) {
+	/**
+	 * @var LocationArrayDecorator
+	 */
+	private $_location_decorator = null;
+
+	public function __construct(CouponArrayDecorator $couponDecorator, BarcodeArrayDecorator $barcodeDecorator, LocationArrayDecorator $locationDecorator) {
 		$this->_coupon_decorator = $couponDecorator;
 		$this->_barcode_decorator = $barcodeDecorator;
+		$this->_location_decorator = $locationDecorator;
 	}
 
 	/**
@@ -54,10 +61,9 @@ class PHPassKitArrayDecorator {
 		$this->_decorateColor($output, 'foregroundColor', $passKit->getForegroundColor());
 		$this->_decorateColor($output, 'labelColor', $passKit->getLabelColor());
 
-		$logoText = $passKit->getLogoText();
-		if(!is_null($logoText)) {
-			$output['logoText'] = $logoText;
-		}
+		$this->_setOptional($output, 'logoText', $passKit->getLogoText());
+
+		$this->_decorateLocations($output, $passKit);
 
 		return $output;
 	}
@@ -65,6 +71,23 @@ class PHPassKitArrayDecorator {
 	private function _decorateColor(&$output, $key, $color = null) {
 		if(!is_null($color) && is_array($color) && count($color) == 3) {
 			$output[$key] = sprintf('rgb(%d, %d, %d)', $color[0], $color[1], $color[2]);
+		}
+	}
+
+	private function _setOptional(&$output, $key, $value = null) {
+		if(!is_null($value)) {
+			$output[$key] = $value;
+		}
+	}
+
+	private function _decorateLocations(&$output, PHPassKit $passKit) {
+		$locations = $passKit->getLocations();
+
+		if(is_array($locations) && count($locations) > 0) {
+			$output['locations'] = array();
+			foreach($locations as $location) {
+				$output['locations'][] = $this->_location_decorator->decorate($location);
+			}
 		}
 	}
 }

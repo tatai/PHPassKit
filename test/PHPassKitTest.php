@@ -3,6 +3,7 @@
 use PHPassKit\PHPassKit;
 use PHPassKit\Style\Coupon;
 use PHPassKit\Keys\LowerLevel\Barcode;
+use PHPassKit\Keys\LowerLevel\Location;
 
 class PHPassKitTest extends PHPUnit_Framework_TestCase {
 	/**
@@ -199,4 +200,34 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($barcode, $this->_pass_kit->getBarcode());
 	}
 
+	/**
+	 * @test
+	 */
+	public function whenNoLocationIsGivenThenValueIsAnEmptyArray() {
+		$this->assertEquals(array(), $this->_pass_kit->getLocations());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenOneLocationIsGivenThenItCanBeReturnedInLocationsArray() {
+		$location = $this->getMock('PHPassKit\Keys\LowerLevel\Location', array(), array(1, 2));
+		$this->_pass_kit->addLocation($location);
+
+		$this->assertEquals(array($location), $this->_pass_kit->getLocations());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenSeveralLocationsAreGivenThenTheyCanBeReturnedInLocationsArray() {
+		$location1 = $this->getMock('PHPassKit\Keys\LowerLevel\Location', array(), array(1, 2));
+		$this->_pass_kit->addLocation($location1);
+		$location2 = $this->getMock('PHPassKit\Keys\LowerLevel\Location', array(), array(3, 4));
+		$this->_pass_kit->addLocation($location2);
+		$location3 = $this->getMock('PHPassKit\Keys\LowerLevel\Location', array(), array(5, 6));
+		$this->_pass_kit->addLocation($location3);
+
+		$this->assertEquals(array($location1, $location2, $location3), $this->_pass_kit->getLocations());
+	}
 }
