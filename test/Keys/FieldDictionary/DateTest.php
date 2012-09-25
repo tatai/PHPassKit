@@ -1,6 +1,6 @@
 <?php
 
-use PHPassKit\Keys\LowerLevel\Date;
+use PHPassKit\Keys\FieldDictionary\Date;
 
 class DateTest extends PHPUnit_Framework_TestCase {
 	/**

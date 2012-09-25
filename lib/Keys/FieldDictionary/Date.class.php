@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPassKit\Keys\LowerLevel;
+namespace PHPassKit\Keys\FieldDictionary;
 
 class Date {
 
