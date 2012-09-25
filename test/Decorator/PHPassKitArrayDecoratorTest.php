@@ -493,4 +493,33 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$output = $this->_decorator->decorate($this->_pass_kit);
 		$this->assertEquals($apps, $output['associatedStoreIdentifiers']);
 	}
+
+	/**
+	 * @test
+	 */
+	public function relevantDateFromPassKitIsUsed() {
+		$this->_pass_kit->expects($this->once())->method('getRelevantDate');
+
+		$this->_decorator->decorate($this->_pass_kit);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenRelevantDateIsNotSetThenItIsNotInTheOutput() {
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertFalse(array_key_exists('relevantDate', $output));
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenRelevantDateIsSetThenItIsInTheOutputInIso8601Format() {
+		$timestamp = mktime(0, 0, 0, 9, 25, 2012);
+		$this->_pass_kit->expects($this->any())->method('getRelevantDate')->will($this->returnValue($timestamp));
+
+		$output = $this->_decorator->decorate($this->_pass_kit);
+		$this->assertEquals(date('c', $timestamp), $output['relevantDate']);
+	}
+
 }

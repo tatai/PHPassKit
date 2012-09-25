@@ -70,6 +70,10 @@ class PHPassKitArrayDecorator {
 
 		$this->_decorateLocations($output, $passKit);
 
+		$relevantDate = $passKit->getRelevantDate();
+		if(!is_null($relevantDate)) {
+			$output['relevantDate'] = date('c', $relevantDate);
+		}
 
 		return $output;
 	}

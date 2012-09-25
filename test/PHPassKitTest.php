@@ -261,4 +261,41 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(array($id1, $id2, $id3), $this->_pass_kit->getAssociatedApps());
 	}
+
+	/**
+	 * @test
+	 */
+	public function whenRelevantDateIsNotSetThenReturnsNull() {
+		$this->assertNull($this->_pass_kit->getRelevantDate());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenRelevantDateIsGivenAsYearMonthAndDayThenItCanBeReturned() {
+		$date = '2012-09-25';
+		$this->_pass_kit->setRelevantDate($date);
+
+		$this->assertEquals(mktime(0, 0, 0, 9, 25, 2012), $this->_pass_kit->getRelevantDate());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenRelevantDateIsGivenAsTimestampThenItCanBeReturned() {
+		$timestamp = 1348562693;
+		$this->_pass_kit->setRelevantDate($timestamp);
+
+		$this->assertEquals($timestamp, $this->_pass_kit->getRelevantDate());
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenRelevantDateIsNotGivenInTheCorrectFormatThenItReturnsNull() {
+		$date = 'Sep 25, 2012';
+		$this->_pass_kit->setRelevantDate($date);
+
+		$this->assertNull($this->_pass_kit->getRelevantDate());
+	}
 }

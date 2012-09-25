@@ -85,7 +85,13 @@ class PHPassKit {
 	 * @var array of string
 	 */
 	private $_associated_apps = null;
-	
+
+	/**
+	 * 
+	 * @var string
+	 */
+	private $_relevant_date = null;
+			
 	public function __construct($description, $organizationName, $passTypeIdentifier, $serialNumber, $teamIdentifier) {
 		$this->_description = $description;
 		$this->_organization_name = $organizationName;
@@ -286,4 +292,28 @@ class PHPassKit {
 	public function addAssociatedApp($appId) {
 		$this->_associated_apps[] = $appId;
 	}
+
+	/**
+	 * Returns the relevant date (if defined) in YYYY-MM-DD format
+	 * 
+	 * @return string
+	 */
+	public function getRelevantDate() {
+		return $this->_relevant_date;
+	}
+
+	/**
+	 * Sets the relevant date. Use YYYY-MM-DD format or timestamp
+	 * 
+	 * @param string $date YYYY-MM-DD or timestamp
+	 */
+	public function setRelevantDate($date) {
+		if(preg_match('/^([0-9]{4})-([0-9]{2})-([0-9]{2})/', $date, $matches)) {
+			$this->_relevant_date = mktime(0, 0, 0, $matches[2], $matches[3], $matches[1]);
+		}
+		else if(preg_match('/^[0-9]+$/', $date)) {
+			$this->_relevant_date = $date;
+		}
+	}
+
 }
