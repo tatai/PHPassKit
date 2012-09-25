@@ -9,7 +9,7 @@
 	</testsuites>
 	<filter>
 		<whitelist>
-			<directory suffix=".php">/Users/fran/Projects/PHPassKit/classes</directory>
+			<directory suffix=".php">/Users/fran/Projects/PHPassKit/src</directory>
 		</whitelist>
 	</filter>
 </phpunit>
