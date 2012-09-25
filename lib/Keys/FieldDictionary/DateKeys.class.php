@@ -2,7 +2,14 @@
 
 namespace PHPassKit\Keys\FieldDictionary;
 
-class Date {
+use PHPassKit\Keys\FieldDictionary\FieldDictionary;
+use PHPassKit\PHPassKitException;
+
+class DateKeys extends FieldDictionary {
+	/**
+	 * @var int
+	 */
+	private $_value = null;
 
 	/**
 	 * @var int @see DateStyle
@@ -19,8 +26,31 @@ class Date {
 	 */
 	private $_is_relative = null;
 
-	public function __construct() {
+	/**
+	 * 
+	 * @param string $key   @see FieldDictionary
+	 * @param int $timestamp date in timestamp format
+	 *
+	 * @throws  PHPassKitException
+	 */
+	public function __construct($key, $timestamp) {
+		parent::__construct($key);
+
+		if(!preg_match('/^[0-9]+$/', $timestamp)) {
+			throw new PHPassKitException('Value given does not seem to be a timestamp');
+		}
+
+		$this->_value = (int)$timestamp;
+
 		$this->_is_relative = false;
+	}
+
+	/**
+	 * 
+	 * @return int
+	 */
+	public function getValue() {
+		return $this->_value;
 	}
 
 	/**

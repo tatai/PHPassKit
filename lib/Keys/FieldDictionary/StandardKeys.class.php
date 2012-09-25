@@ -2,47 +2,30 @@
 
 namespace PHPassKit\Keys\FieldDictionary;
 
-class StandardKeys {
-	/**
-	 * @var string
-	 */
-	private $_key = null;
+use PHPassKit\Keys\FieldDictionary\FieldDictionary;
+use PHPassKit\PHPassKitException;
 
+class StandardKeys extends FieldDictionary {
 	/**
 	 * @var string
 	 */
 	private $_value = null;
 
 	/**
-	 * @var string
-	 */
-	private $_change_message = null;
-	
-	/**
-	 * @var string
-	 */
-	private $_label = null;
-
-	/**
-	 * @var int
-	 */
-	private $_text_alignment = null;
-
-	/**
 	 * 
 	 * @param string	$key
 	 * @param string	$value
+	 *
+	 * @throws  PHPassKitException
 	 */
 	public function __construct($key, $value) {
-		$this->_key = $key;
-		$this->_value = $value;
-	}
+		parent::__construct($key);
 
-	/**
-	 * @return string
-	 */
-	public function getKey() {
-		return $this->_key;
+		if(!is_string($value)) {
+			throw new PHPassKitException('Value given does not seem to be a string');
+		}
+
+		$this->_value = $value;
 	}
 
 	/**
@@ -52,45 +35,4 @@ class StandardKeys {
 		return $this->_value;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getChangeMessage() {
-		return $this->_change_message;
-	}
-
-	/**
-	 * @param string $changeMessage
-	 */
-	public function setChangeMessage($changeMessage) {
-		$this->_change_message = $changeMessage;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getLabel() {
-		return $this->_label;
-	}
-
-	/**
-	 * @param string $label
-	 */
-	public function setLabel($label) {
-		$this->_label = $label;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getTextAlignment() {
-		return $this->_text_alignment;
-	}
-
-	/**
-	 * @param int $textAlignment
-	 */
-	public function setTextAlignment($textAlignment) {
-		$this->_text_alignment = $textAlignment;
-	}
 }
