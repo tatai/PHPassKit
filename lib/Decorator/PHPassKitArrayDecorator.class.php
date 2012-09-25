@@ -4,31 +4,17 @@ namespace PHPassKit\Decorator;
 
 use PHPassKit\PHPassKit;
 use PHPassKit\Style\Coupon;
-use PHPassKit\Decorator\CouponArrayDecorator;
-use PHPassKit\Decorator\BarcodeArrayDecorator;
-use PHPassKit\Decorator\LocationArrayDecorator;
+use PHPassKit\Decorator\ArrayDecoratorManager;
 
 class PHPassKitArrayDecorator {
 
 	/**
-	 * @var CouponArrayDecorator
+	 * @var ArrayDecoratorManager
 	 */
-	private $_coupon_decorator = null;
+	private $_decorator_manager = null;
 
-	/**
-	 * @var BarcodeArrayDecorator
-	 */
-	private $_barcode_decorator = null;
-
-	/**
-	 * @var LocationArrayDecorator
-	 */
-	private $_location_decorator = null;
-
-	public function __construct(CouponArrayDecorator $couponDecorator, BarcodeArrayDecorator $barcodeDecorator, LocationArrayDecorator $locationDecorator) {
-		$this->_coupon_decorator = $couponDecorator;
-		$this->_barcode_decorator = $barcodeDecorator;
-		$this->_location_decorator = $locationDecorator;
+	public function __construct(ArrayDecoratorManager $decoratorManager) {
+		$this->_decorator_manager = $decoratorManager;
 	}
 
 	/**
@@ -49,12 +35,12 @@ class PHPassKitArrayDecorator {
 
 		$style = $passKit->getStyle();
 		if(!is_null($style) && $style instanceof Coupon) {
-			$output['coupon'] = $this->_coupon_decorator->decorate($style);
+			$output['coupon'] = $this->_decorator_manager->decorate($style);
 		}
 
 		$barcode = $passKit->getBarcode();
 		if(!is_null($barcode)) {
-			$output['barcode'] = $this->_barcode_decorator->decorate($barcode);
+			$output['barcode'] = $this->_decorator_manager->decorate($barcode);
 		}
 
 		$associatedApps = $passKit->getAssociatedApps();
@@ -103,7 +89,7 @@ class PHPassKitArrayDecorator {
 		if(is_array($locations) && count($locations) > 0) {
 			$output['locations'] = array();
 			foreach($locations as $location) {
-				$output['locations'][] = $this->_location_decorator->decorate($location);
+				$output['locations'][] = $this->_decorator_manager->decorate($location);
 			}
 		}
 	}

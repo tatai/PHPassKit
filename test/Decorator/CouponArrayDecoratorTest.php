@@ -1,7 +1,7 @@
 <?php
 
 use PHPassKit\Decorator\CouponArrayDecorator;
-use PHPassKit\Decorator\StandardKeysArrayDecorator;
+use PHPassKit\Decorator\ArrayDecoratorManager;
 use PHPassKit\Style\Coupon;
 use PHPassKit\Keys\FieldDictionary\StandardKeys;
 
@@ -17,14 +17,14 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	private $_decorator = null;
 
 	/**
-	 * @var StandardKeysArrayDecorator
+	 * @var ArrayDecoratorManager
 	 */
-	private $_keys_decorator = null;
+	private $_decorator_manager = null;
 
 	public function setup() {
 		$this->_coupon = $this->getMock('PHPassKit\Style\Coupon');
-		$this->_keys_decorator = $this->getMock('PHPassKit\Decorator\StandardKeysArrayDecorator');
-		$this->_decorator = new CouponArrayDecorator($this->_keys_decorator);
+		$this->_decorator_manager = $this->getMock('PHPassKit\Decorator\ArrayDecoratorManager');
+		$this->_decorator = new CouponArrayDecorator($this->_decorator_manager);
 	}
 
 	/**
@@ -53,7 +53,7 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->_coupon->expects($this->any())->method('getKeys')->will($this->onConsecutiveCalls($headerFields));
 
 		$expected = 'keys decoration';
-		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->onConsecutiveCalls($expected));
+		$this->_decorator_manager->expects($this->any())->method('decorate')->will($this->onConsecutiveCalls($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
 		$this->assertEquals(array($expected), $output['headerFields']);
@@ -76,7 +76,7 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->_coupon->expects($this->any())->method('getKeys')->will($this->onConsecutiveCalls(null, $primaryFields));
 
 		$expected = 'keys decoration';
-		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
+		$this->_decorator_manager->expects($this->any())->method('decorate')->will($this->returnValue($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
 		$this->assertEquals(array($expected), $output['primaryFields']);
@@ -99,7 +99,7 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->_coupon->expects($this->any())->method('getKeys')->will($this->onConsecutiveCalls(null, null, $secondaryFields));
 
 		$expected = 'keys decoration';
-		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
+		$this->_decorator_manager->expects($this->any())->method('decorate')->will($this->returnValue($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
 		$this->assertEquals(array($expected), $output['secondaryFields']);
@@ -122,7 +122,7 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->_coupon->expects($this->any())->method('getKeys')->will($this->onConsecutiveCalls(null, null, null, $auxiliaryFields));
 
 		$expected = 'keys decoration';
-		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
+		$this->_decorator_manager->expects($this->any())->method('decorate')->will($this->returnValue($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
 		$this->assertEquals(array($expected), $output['auxiliaryFields']);
@@ -145,7 +145,7 @@ class CouponArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->_coupon->expects($this->any())->method('getKeys')->will($this->onConsecutiveCalls(null, null, null, null, $backFields));
 
 		$expected = 'keys decoration';
-		$this->_keys_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
+		$this->_decorator_manager->expects($this->any())->method('decorate')->will($this->returnValue($expected));
 
 		$output = $this->_decorator->decorate($this->_coupon);
 		$this->assertEquals(array($expected), $output['backFields']);

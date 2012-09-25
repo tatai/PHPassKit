@@ -3,9 +3,7 @@
 use PHPassKit\PHPassKit;
 use PHPassKit\Decorator\PHPassKitArrayDecorator;
 use PHPassKit\Decorator\CouponArrayDecorator;
-use PHPassKit\Decorator\StandardKeysArrayDecorator;
-use PHPassKit\Decorator\LocationArrayDecorator;
-use PHPassKit\Decorator\BarcodeArrayDecorator;
+use PHPassKit\Decorator\ArrayDecoratorManager;
 use PHPassKit\Style\Coupon;
 
 class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
@@ -20,26 +18,14 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	private $_decorator = null;
 
 	/**
-	 * @var CouponArrayDecorator
+	 * @var ArrayDecoratorManager
 	 */
-	private $_coupon_decorator = null;
-
-	/**
-	 * @var BarcodeArrayDecorator
-	 */
-	private $_barcode_decorator = null;
-
-	/**
-	 * @var LocationArrayDecorator
-	 */
-	private $_location_decorator = null;
+	private $_decorator_manager = null;
 
 	public function setup() {
 		$this->_pass_kit = $this->getMock('PHPassKit\PHPassKit', array(), array('a', 'a', 'a', 'a', 'a'));
-		$this->_coupon_decorator = $this->getMock('PHPassKit\Decorator\CouponArrayDecorator', array(), array(new StandardKeysArrayDecorator()));
-		$this->_barcode_decorator = $this->getMock('PHPassKit\Decorator\BarcodeArrayDecorator', array(), array());
-		$this->_location_decorator = $this->getMock('PHPassKit\Decorator\LocationArrayDecorator', array(), array());
-		$this->_decorator = new PHPassKitArrayDecorator($this->_coupon_decorator, $this->_barcode_decorator, $this->_location_decorator);
+		$this->_decorator_manager = $this->getMock('PHPassKit\Decorator\ArrayDecoratorManager', array(), array());
+		$this->_decorator = new PHPassKitArrayDecorator($this->_decorator_manager);
 	}
 
 	/**
@@ -185,7 +171,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->_pass_kit->expects($this->any())->method('getStyle')->will($this->returnValue($coupon));
 
 		$expected = 'decoration result';
-		$this->_coupon_decorator->expects($this->once())->method('decorate')->will($this->returnValue($expected));
+		$this->_decorator_manager->expects($this->once())->method('decorate')->will($this->returnValue($expected));
 		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($expected, $output['coupon']);
@@ -393,7 +379,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->_pass_kit->expects($this->any())->method('getBarcode')->will($this->returnValue($barcode));
 
 		$expected = 'decorator result';
-		$this->_barcode_decorator->expects($this->once())->method('decorate')->will($this->returnValue($expected));
+		$this->_decorator_manager->expects($this->once())->method('decorate')->will($this->returnValue($expected));
 		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($expected, $output['barcode']);
@@ -434,7 +420,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$this->_pass_kit->expects($this->any())->method('getLocations')->will($this->returnValue(array($location)));
 
 		$expected = 'decorator result';
-		$this->_location_decorator->expects($this->any())->method('decorate')->will($this->returnValue($expected));
+		$this->_decorator_manager->expects($this->any())->method('decorate')->will($this->returnValue($expected));
 		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals(array($expected), $output['locations']);
@@ -450,7 +436,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 
 		$decorator1 = 'decorator result1';
 		$decorator2 = 'decorator result1';
-		$this->_location_decorator->expects($this->any())->method('decorate')->will($this->onConsecutiveCalls($decorator1, $decorator2));
+		$this->_decorator_manager->expects($this->any())->method('decorate')->will($this->onConsecutiveCalls($decorator1, $decorator2));
 		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals(array($decorator1, $decorator2), $output['locations']);

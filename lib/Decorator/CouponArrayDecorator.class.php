@@ -2,17 +2,17 @@
 
 namespace PHPassKit\Decorator;
 
-use PHPassKit\Decorator\StandardKeysArrayDecorator;
+use PHPassKit\Decorator\ArrayDecoratorManager;
 use PHPassKit\Style\Coupon;
 
 class CouponArrayDecorator {
 	/**
-	 * @var StandardKeysArrayDecorator
+	 * @var ArrayDecoratorManager
 	 */
-	private $_keys_decorator = null;
+	private $_decorator_manager = null;
 
-	public function __construct(StandardKeysArrayDecorator $keysDecorator) {
-		$this->_keys_decorator = $keysDecorator;
+	public function __construct(ArrayDecoratorManager $decoratorManager) {
+		$this->_decorator_manager = $decoratorManager;
 	}
 
 	public function decorate(Coupon $coupon) {
@@ -31,7 +31,7 @@ class CouponArrayDecorator {
 		$keys = $coupon->getKeys($name);
 		if(!is_null($keys)) {
 			foreach($keys as $key) {
-				$output[$name . 'Fields'][] = $this->_keys_decorator->decorate($key);
+				$output[$name . 'Fields'][] = $this->_decorator_manager->decorate($key);
 			}
 		}
 	}

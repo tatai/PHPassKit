@@ -2,7 +2,7 @@
 
 namespace PHPassKit\Style;
 
-use PHPassKit\Keys\FieldDictionary\StandardKeys;
+use PHPassKit\Keys\FieldDictionary\FieldDictionary;
 use PHPassKit\PHPassKitException;
 
 abstract class Style {
@@ -25,10 +25,10 @@ abstract class Style {
 	/**
 	 * Add keys for field
 	 * 
-	 * @param string		$fieldName	name of the fields
-	 * @param StandardKeys	$keys		keys to set
+	 * @param string			$fieldName	name of the fields
+	 * @param FieldDictionary	$keys		keys to set
 	 */
-	public function addKeys($fieldName, StandardKeys $keys) {
+	public function addKeys($fieldName, FieldDictionary $keys) {
 		if(!in_array($fieldName, $this->_allowed_fields)) {
 			throw new PHPassKitException($fieldName . ' is not a valid field name for ' . __CLASS__);
 		}
