@@ -41,8 +41,8 @@ class Signature {
 		$this->_password = $password;
 		$this->_pkcs12 = $pkcs12;
 
-		$this->_cache_folder = __DIR__ . '/../../cache';
-		$this->_wwdr_file = __DIR__ . '/../../data/AppleWWDR.pem';
+		$this->_cache_folder = __DIR__ . '/../../../cache';
+		$this->_wwdr_file = __DIR__ . '/../../../data/AppleWWDR.pem';
 	}
 
 	public function setCacheFolder($path) {
