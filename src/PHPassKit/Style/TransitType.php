@@ -11,19 +11,19 @@ class TransitType {
 
 	static public function getConstName($style) {
 		switch ($style) {
-			case DateStyle::AIR:
+			case TransitType::AIR:
 				return 'PKTransitTypeAir';
 				break;
-			case DateStyle::BOAT:
+			case TransitType::BOAT:
 				return 'PKTransitTypeBoat';
 				break;
-			case DateStyle::BUS:
+			case TransitType::BUS:
 				return 'PKTransitTypeBus';
 				break;
-			case DateStyle::GENERIC:
+			case TransitType::GENERIC:
 				return 'PKTransitTypeGeneric';
 				break;
-			case DateStyle::TRAIN:
+			case TransitType::TRAIN:
 				return 'PKTransitTypeTrain';
 				break;
 		}
