@@ -26,6 +26,11 @@ class Signature {
 	private $_pkcs12 = null;
 
 	/**
+	 * @var string
+	 */
+	private $_wwdr_file = null;
+
+	/**
 	 * 
 	 * @param string	$certificate 	path to PKCS#12 certificate file
 	 * @param string	$password 		password to open certificate file
@@ -37,6 +42,7 @@ class Signature {
 		$this->_pkcs12 = $pkcs12;
 
 		$this->_cache_folder = __DIR__ . '/../../cache';
+		$this->_wwdr_file = __DIR__ . '/../../data/AppleWWDR.pem';
 	}
 
 	public function setCacheFolder($path) {
@@ -64,9 +70,8 @@ class Signature {
 			$signaturePath = dirname($manifestFilePath) . DIRECTORY_SEPARATOR . 'signature';
 		}
 
-		if(!$this->_pkcs12->sign($manifestFilePath, $signaturePath, $certificate, $privateKey)) {
+		if(!$this->_pkcs12->sign($manifestFilePath, $signaturePath, $certificate, $privateKey, $this->_wwdr_file)) {
 			throw new PHPassKitException('Cannot create signature for manifest');
-			
 		}
 
 		$signature = file_get_contents($signaturePath);
@@ -110,4 +115,24 @@ class Signature {
 			throw new \Exception('Cache folder ' . $this->_cache_folder . ' is not readable');
 		}
 	}
+
+	/**
+	 * Sets the path to the Apple Worldwide Developer Relations certificate
+	 * 
+	 * @param string $wwdrPath path to the file
+	 */
+	public function setAppleWWDR($wwdrPath) {
+		$this->_wwdr_file = $wwdrPath;
+	}
+
+	/**
+	 * Disables package signing with the Apple Worldwide Developer Relations
+	 * certificate. If done, PassKits can be created and download into iOS6
+	 * devices and simulator, but just simulator can add it to PassBook. Trying
+	 * to add a non-signed Passkit into iOS 6 devices will cause error
+	 */
+	public function disableWWDRCertificate() {
+		$this->_wwdr_file = null;
+	}
+
 }

@@ -37,7 +37,11 @@ class Pkcs12 {
 	 * 
 	 * @return boolean 	true on success, false otherwise
 	 */
-	public function sign($fileToSign, $saveTo, $certificate, $privateKey) {
+	public function sign($fileToSign, $saveTo, $certificate, $privateKey, $extraCerts = null) {
+		if(!is_null($extraCerts)) {
+			return openssl_pkcs7_sign($fileToSign, $saveTo, $certificate, $privateKey, array(), PKCS7_BINARY | PKCS7_DETACHED, $extraCerts);
+		}
+
 		return openssl_pkcs7_sign($fileToSign, $saveTo, $certificate, $privateKey, array(), PKCS7_BINARY | PKCS7_DETACHED);
 	}
 
