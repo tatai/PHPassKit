@@ -4,7 +4,7 @@ namespace PHPassKit;
 function Autoloader($class = null) {
 	$parts = explode('\\', $class);
 
-	$namespace = array_shift($parts);
+	$namespace = $parts[0];
 
 	if($namespace != __NAMESPACE__) {
 		return false;
