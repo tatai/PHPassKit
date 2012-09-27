@@ -3,7 +3,7 @@
 namespace PHPassKit\Decorator;
 
 use PHPassKit\Decorator\ArrayDecoratorFactory;
-use PHPassKit\PHPassKitException;
+use PHPassKit\Common\PHPassKitException;
 
 class ArrayDecoratorManager {
 

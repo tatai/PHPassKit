@@ -1,7 +1,7 @@
 <?php
 
 use PHPassKit\Generator\Manifest;
-use PHPassKit\PHPassKit;
+use PHPassKit\Common\PHPassKit;
 use PHPassKit\Util\Hasher;
 
 class ManifestTest extends PHPUnit_Framework_TestCase {
@@ -21,7 +21,7 @@ class ManifestTest extends PHPUnit_Framework_TestCase {
 	private $_hasher = null;
 
 	public function setup() {
-		$this->_pass_kit = $this->getMock('PHPassKit\PHPassKit', array(), array('a', 'a', 'a', 'a', 'a'));
+		$this->_pass_kit = $this->getMock('PHPassKit\Common\PHPassKit', array(), array('a', 'a', 'a', 'a', 'a'));
 		$this->_hasher = $this->getMock('PHPassKit\Util\Hasher');
 		$this->_manifest = new Manifest($this->_hasher);
 	}

@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPassKit;
+namespace PHPassKit\Common;
 
 class PHPassKitException extends \Exception {
 

@@ -3,7 +3,7 @@
 namespace PHPassKit\Keys\FieldDictionary;
 
 use PHPassKit\Keys\FieldDictionary\FieldDictionary;
-use PHPassKit\PHPassKitException;
+use PHPassKit\Common\PHPassKitException;
 
 class NumberKeys extends FieldDictionary {
 	/**

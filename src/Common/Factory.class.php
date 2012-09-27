@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPassKit;
+namespace PHPassKit\Common;
 
 use PHPassKit\Decorator\ArrayDecoratorManager;
 use PHPassKit\Decorator\PHPassKitArrayDecorator;

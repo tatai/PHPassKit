@@ -22,7 +22,7 @@ class NumberKeysTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException PHPassKit\PHPassKitException
+	 * @expectedException PHPassKit\Common\PHPassKitException
 	 */
 	public function whenValueIsNotANumberThenThrowsException() {
 		new NumberKeys('a', 'b');
@@ -30,7 +30,7 @@ class NumberKeysTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException PHPassKit\PHPassKitException
+	 * @expectedException PHPassKit\Common\PHPassKitException
 	 */
 	public function whenValueIsANumberInStringFormatThenThrowsException() {
 		new NumberKeys('a', '3.2');

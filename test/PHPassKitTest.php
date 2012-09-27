@@ -1,6 +1,6 @@
 <?php
 
-use PHPassKit\PHPassKit;
+use PHPassKit\Common\PHPassKit;
 use PHPassKit\Style\Coupon;
 use PHPassKit\Keys\LowerLevel\Barcode;
 use PHPassKit\Keys\LowerLevel\Location;
@@ -291,7 +291,7 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException PHPassKit\PHPassKitException
+	 * @expectedException PHPassKit\Common\PHPassKitException
 	 */
 	public function whenRelevantDateIsNotGivenInTheCorrectFormatThenThrowsException() {
 		$date = 'Sep 25, 2012';
@@ -334,7 +334,7 @@ class PHPassKitTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException PHPassKit\PHPassKitException
+	 * @expectedException PHPassKit\Common\PHPassKitException
 	 */
 	public function whenTokenHasLessThan16CharsThenThrowsException() {
 		$token= '1234567890';

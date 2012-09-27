@@ -2,7 +2,7 @@
 
 namespace PHPassKit\Generator;
 
-use PHPassKit\PHPassKit;
+use PHPassKit\Common\PHPassKit;
 use PHPassKit\Util\Hasher;
 
 class Manifest {

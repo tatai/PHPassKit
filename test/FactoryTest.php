@@ -1,6 +1,6 @@
 <?php
 
-use PHPassKit\Factory;
+use PHPassKit\Common\Factory;
 use PHPassKit\Generator\Builder;
 
 class FactoryTest extends PHPUnit_Framework_TestCase {

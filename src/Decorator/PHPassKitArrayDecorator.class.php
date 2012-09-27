@@ -2,7 +2,7 @@
 
 namespace PHPassKit\Decorator;
 
-use PHPassKit\PHPassKit;
+use PHPassKit\Common\PHPassKit;
 use PHPassKit\Style\Coupon;
 use PHPassKit\Decorator\ArrayDecoratorManager;
 

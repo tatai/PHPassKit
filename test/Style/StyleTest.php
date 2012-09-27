@@ -50,7 +50,7 @@ class StyleTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException PHPassKit\PHPassKitException
+	 * @expectedException PHPassKit\Common\PHPassKitException
 	 */
 	public function whenTryingToSetFieldsThatAreNotAllowedThenThrowsException() {
 		$this->_style->addKeys('notAllowed', new StandardKeys('a', 'b'));

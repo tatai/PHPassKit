@@ -22,7 +22,7 @@ class DateKeysTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException PHPassKit\PHPassKitException
+	 * @expectedException PHPassKit\Common\PHPassKitException
 	 */
 	public function whenValueIsNotATimestampThenThrowsException() {
 		new DateKeys('a', 'b');

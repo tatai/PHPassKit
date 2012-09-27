@@ -1,6 +1,6 @@
 <?php
 
-use PHPassKit\PHPassKit;
+use PHPassKit\Common\PHPassKit;
 use PHPassKit\Decorator\PHPassKitArrayDecorator;
 use PHPassKit\Decorator\CouponArrayDecorator;
 use PHPassKit\Decorator\ArrayDecoratorManager;
@@ -23,7 +23,7 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	private $_decorator_manager = null;
 
 	public function setup() {
-		$this->_pass_kit = $this->getMock('PHPassKit\PHPassKit', array(), array('a', 'a', 'a', 'a', 'a'));
+		$this->_pass_kit = $this->getMock('PHPassKit\Common\PHPassKit', array(), array('a', 'a', 'a', 'a', 'a'));
 		$this->_decorator_manager = $this->getMock('PHPassKit\Decorator\ArrayDecoratorManager', array(), array());
 		$this->_decorator = new PHPassKitArrayDecorator($this->_decorator_manager);
 	}

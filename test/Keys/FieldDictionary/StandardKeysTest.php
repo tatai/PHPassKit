@@ -35,7 +35,7 @@ class StandardKeysTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @test
-	 * @expectedException PHPassKit\PHPassKitException
+	 * @expectedException PHPassKit\Common\PHPassKitException
 	 */
 	public function whenValueIsNotAStringThenThrowsException() {
 		new StandardKeys('key', 1);

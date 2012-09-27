@@ -3,7 +3,7 @@
 namespace PHPassKit\Style;
 
 use PHPassKit\Keys\FieldDictionary\FieldDictionary;
-use PHPassKit\PHPassKitException;
+use PHPassKit\Common\PHPassKitException;
 
 abstract class Style {
 	/**

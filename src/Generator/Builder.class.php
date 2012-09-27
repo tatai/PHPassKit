@@ -2,7 +2,7 @@
 
 namespace PHPassKit\Generator;
 
-use PHPassKit\PHPassKit;
+use PHPassKit\Common\PHPassKit;
 use PHPassKit\Generator\Manifest;
 use PHPassKit\Generator\Signature;
 use PHPassKit\Decorator\PHPassKitArrayDecorator;
