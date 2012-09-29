@@ -4,6 +4,7 @@ namespace PHPassKit\Decorator;
 
 use PHPassKit\Common\PHPassKit;
 use PHPassKit\Style\Coupon;
+use PHPassKit\Style\BoardingPass;
 use PHPassKit\Decorator\ArrayDecoratorManager;
 
 class PHPassKitArrayDecorator {
@@ -34,8 +35,18 @@ class PHPassKitArrayDecorator {
 		);
 
 		$style = $passKit->getStyle();
-		if(!is_null($style) && $style instanceof Coupon) {
-			$output['coupon'] = $this->_decorator_manager->decorate($style);
+		if(!is_null($style)) {
+			$key = null;
+			if($style instanceof Coupon) {
+				$key = 'coupon';
+			}
+			else if($style instanceof BoardingPass) {
+				$key = 'boardingPass';
+			}
+
+			if(!is_null($key)) {
+				$output[$key] = $this->_decorator_manager->decorate($style);
+			}
 		}
 
 		$barcode = $passKit->getBarcode();
