@@ -7,6 +7,7 @@ use PHPassKit\Decorator\BoardingPassArrayDecorator;
 use PHPassKit\Decorator\ArrayDecoratorManager;
 use PHPassKit\Style\Coupon;
 use PHPassKit\Style\BoardingPass;
+use PHPassKit\Style\EventTicket;
 
 class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	/**
@@ -191,6 +192,20 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($expected, $output['boardingPass']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenStyleIsEventTicketThenItIsDecoratedInTheCorrectKey() {
+		$eventTicket = $this->getMock('PHPassKit\Style\EventTicket');
+		$this->_pass_kit->expects($this->any())->method('getStyle')->will($this->returnValue($eventTicket));
+
+		$expected = 'decoration result';
+		$this->_decorator_manager->expects($this->once())->method('decorate')->will($this->returnValue($expected));
+		$output = $this->_decorator->decorate($this->_pass_kit);
+
+		$this->assertEquals($expected, $output['eventTicket']);
 	}
 
 	/**

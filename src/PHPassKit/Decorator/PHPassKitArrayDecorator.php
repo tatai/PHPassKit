@@ -5,6 +5,7 @@ namespace PHPassKit\Decorator;
 use PHPassKit\Common\PHPassKit;
 use PHPassKit\Style\Coupon;
 use PHPassKit\Style\BoardingPass;
+use PHPassKit\Style\EventTicket;
 use PHPassKit\Decorator\ArrayDecoratorManager;
 
 class PHPassKitArrayDecorator {
@@ -42,6 +43,9 @@ class PHPassKitArrayDecorator {
 			}
 			else if($style instanceof BoardingPass) {
 				$key = 'boardingPass';
+			}
+			else if($style instanceof EventTicket) {
+				$key = 'eventTicket';
 			}
 
 			if(!is_null($key)) {
