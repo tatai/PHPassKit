@@ -9,6 +9,7 @@ use PHPassKit\Style\Coupon;
 use PHPassKit\Style\BoardingPass;
 use PHPassKit\Style\EventTicket;
 use PHPassKit\Style\Generic;
+use PHPassKit\Style\StoreCard;
 
 class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 	/**
@@ -221,6 +222,20 @@ class PHPassKitArrayDecoratorTest extends PHPUnit_Framework_TestCase {
 		$output = $this->_decorator->decorate($this->_pass_kit);
 
 		$this->assertEquals($expected, $output['generic']);
+	}
+
+	/**
+	 * @test
+	 */
+	public function whenStyleIsStoreCardThenItIsDecoratedInTheCorrectKey() {
+		$storeCard = $this->getMock('PHPassKit\Style\StoreCard');
+		$this->_pass_kit->expects($this->any())->method('getStyle')->will($this->returnValue($storeCard));
+
+		$expected = 'decoration result';
+		$this->_decorator_manager->expects($this->once())->method('decorate')->will($this->returnValue($expected));
+		$output = $this->_decorator->decorate($this->_pass_kit);
+
+		$this->assertEquals($expected, $output['storeCard']);
 	}
 
 	/**
