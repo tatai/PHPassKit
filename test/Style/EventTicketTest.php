@@ -14,15 +14,9 @@ class EventTicketTest extends PHPUnit_Framework_TestCase {
 	 */
 	private $_keys = null;
 
-	/**
-	 * @var int
-	 */
-	private $_transit_type = null;
-
 	public function setup() {
 		$this->_keys = $this->getMock('\PHPassKit\Keys\FieldDictionary\FieldDictionary', array(), array('key'));
-		$this->_transit_type = 2;
-		$this->_event_ticket = new EventTicket($this->_transit_type);
+		$this->_event_ticket = new EventTicket();
 	}
 
 	/**

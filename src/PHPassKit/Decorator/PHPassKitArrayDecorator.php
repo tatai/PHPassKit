@@ -7,6 +7,7 @@ use PHPassKit\Style\Coupon;
 use PHPassKit\Style\BoardingPass;
 use PHPassKit\Style\EventTicket;
 use PHPassKit\Style\Generic;
+use PHPassKit\Style\StoreCard;
 use PHPassKit\Decorator\ArrayDecoratorManager;
 
 class PHPassKitArrayDecorator {
@@ -50,6 +51,9 @@ class PHPassKitArrayDecorator {
 			}
 			else if($style instanceof Generic) {
 				$key = 'generic';
+			}
+			else if($style instanceof StoreCard) {
+				$key = 'storeCard';
 			}
 
 			if(!is_null($key)) {
