@@ -6,6 +6,7 @@ use PHPassKit\Common\PHPassKit;
 use PHPassKit\Style\Coupon;
 use PHPassKit\Style\BoardingPass;
 use PHPassKit\Style\EventTicket;
+use PHPassKit\Style\Generic;
 use PHPassKit\Decorator\ArrayDecoratorManager;
 
 class PHPassKitArrayDecorator {
@@ -46,6 +47,9 @@ class PHPassKitArrayDecorator {
 			}
 			else if($style instanceof EventTicket) {
 				$key = 'eventTicket';
+			}
+			else if($style instanceof Generic) {
+				$key = 'generic';
 			}
 
 			if(!is_null($key)) {
