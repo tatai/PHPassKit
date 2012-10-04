@@ -82,4 +82,13 @@ class FieldDictionaryTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($alignment, $this->_field->getTextAlignment());
 	}
 
+	/**
+	 * @test
+	 */
+	public function whenLabelIsSetInConstructorThenItCanBeRetrieved() {
+		$label = 'label';
+		$field = new testFieldDictionary('key', $label);
+
+		$this->assertEquals($label, $field->getLabel());
+	}
 }

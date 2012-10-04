@@ -15,11 +15,12 @@ class StandardKeys extends FieldDictionary {
 	 * 
 	 * @param string	$key
 	 * @param string	$value
+	 * @param string	$label
 	 *
 	 * @throws  PHPassKitException
 	 */
-	public function __construct($key, $value) {
-		parent::__construct($key);
+	public function __construct($key, $value, $label = null) {
+		parent::__construct($key, $label);
 
 		if(!is_string($value)) {
 			throw new PHPassKitException('Value given does not seem to be a string');

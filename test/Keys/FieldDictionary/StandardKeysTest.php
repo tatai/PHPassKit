@@ -41,4 +41,13 @@ class StandardKeysTest extends PHPUnit_Framework_TestCase {
 		new StandardKeys('key', 1);
 	}
 
+	/**
+	 * @test
+	 */
+	public function whenLabelIsSetThenItCanBeRetrieved() {
+		$label = 'label';
+		$keys = new StandardKeys('key', 'value', $label);
+
+		$this->assertEquals($label, $keys->getLabel());
+	}
 }
