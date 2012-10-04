@@ -93,4 +93,14 @@ class DateKeysTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertTrue($this->_date->getIsRelative());
 	}
+
+	/**
+	 * @test
+	 */
+	public function whenLabelIsSetThenItCanBeRetrieved() {
+		$label = 'label';
+		$keys = new DateKeys('key', 45, $label);
+
+		$this->assertEquals($label, $keys->getLabel());
+	}
 }

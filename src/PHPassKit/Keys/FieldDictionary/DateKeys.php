@@ -28,13 +28,14 @@ class DateKeys extends FieldDictionary {
 
 	/**
 	 * 
-	 * @param string $key   @see FieldDictionary
-	 * @param int $timestamp date in timestamp format
+	 * @param string 	$key   @see FieldDictionary
+	 * @param int 		$timestamp date in timestamp format
+	 * @param string 	$label
 	 *
 	 * @throws  PHPassKitException
 	 */
-	public function __construct($key, $timestamp) {
-		parent::__construct($key);
+	public function __construct($key, $timestamp, $label = null) {
+		parent::__construct($key, $label);
 
 		if(!preg_match('/^[0-9]+$/', $timestamp)) {
 			throw new PHPassKitException('Value given does not seem to be a timestamp');
