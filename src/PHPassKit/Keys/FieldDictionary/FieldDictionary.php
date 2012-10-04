@@ -35,8 +35,11 @@ abstract class FieldDictionary {
 	 * @param string	$key
 	 * @param string	$value
 	 */
-	public function __construct($key) {
+	public function __construct($key, $label = null) {
 		$this->_key = $key;
+		if(!is_null($label)) {
+			$this->setLabel($label);
+		}
 	}
 
 	/**
