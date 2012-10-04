@@ -23,13 +23,14 @@ class NumberKeys extends FieldDictionary {
 
 	/**
 	 * 
-	 * @param string $key   @see FieldDictionary
-	 * @param int $value
+	 * @param string 	$key   @see FieldDictionary
+	 * @param int 		$value
+	 * @param string 	$label
 	 *
 	 * @throws  PHPassKitException
 	 */
-	public function __construct($key, $value) {
-		parent::__construct($key);
+	public function __construct($key, $value, $label = null) {
+		parent::__construct($key, $label);
 
 		if(!is_int($value) && !is_float($value)) {
 			throw new PHPassKitException('Value given does not seem to be a valid number');

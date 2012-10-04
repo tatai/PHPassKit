@@ -52,4 +52,14 @@ class NumberKeysTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($code, $this->_number->getCurrencyCode());
 	}
+
+	/**
+	 * @test
+	 */
+	public function whenLabelIsSetThenItCanBeRetrieved() {
+		$label = 'label';
+		$keys = new NumberKeys('key', 2, $label);
+
+		$this->assertEquals($label, $keys->getLabel());
+	}
 }
