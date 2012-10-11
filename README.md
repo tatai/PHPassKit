@@ -32,10 +32,11 @@ Usage
 
 Please, get into `examples` folder where you have several examples of Passkits creation with PHPassKit.
 
-You can change any of the values given but remember to set correct values for `passTypeIdentifier` and `teamIdentifier` variables (search them under `use` statments).
+Change whatever you want but remember to set values in `config.php`.
 
-* [How can I get a certificate to sign passkits?](docs/certificates.md)
-* [FAQ](docs/faq.md)
+* [How can I get a certificate to sign passkits?](doc/certificates.md)
+* [What is my passTypeIdentifier and my teamIdentifier?](doc/apple-identifiers.md)
+* [FAQ](doc/faq.md)
 
 Unit testing
 ------------
@@ -63,4 +64,4 @@ Support
 * fran.naranjo@gmail.com 
 * Twitter: [@tatai](http://twitter.com/tatai)
 
-[symfony-doc]: docs/symfony.md
+[symfony-doc]: doc/symfony.md
