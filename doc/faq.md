@@ -16,7 +16,7 @@ Can I use another Apple Worldwide Developer Relations certificate?
 
 Yes. PHPassKit uses an Apple WWDR certificate in .pem format that is storaged in the `data` folder but you can use any other certificate intead this.
 
-To do so, just pass to your Signature instance the path to your Apple WWDR certificate using `setAppleWWDR()`.
+To do so, take a look to method `setAppleWWDR()` of `PHPassKit\Generator\Signature`. Use it to pass it the path to the new Apple WWDR certificate (remember to use .pem format).
 
 What is my passTypeIdentifier and my teamIdentifier?
 ----------------------------------------------------
